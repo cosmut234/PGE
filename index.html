@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuning ECU - TCU, Diagnoză, Codări - PGE Brașov</title>
+    <meta name="description" content="Tuning calibrat, codări, retrofit și diagnoză OE în Brașov. Estimează prețul în 30 secunde, apoi contactează rapid prin WhatsApp sau telefon.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#000000',
+                        accent: '#dc2626',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        .service-card {
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .price-calculator {
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+        }
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%;
+        }
+        .map-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .social-card {
+            transition: all 0.3s ease;
+        }
+        .social-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoRepair",
+      "name": "Production Garage Engineering - PGE Brașov",
+      "image": "",
+      "@id": "",
+      "url": "",
+      "telephone": "+40752099005",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Strada Poienelor 11B",
+        "addressLocality": "Brașov",
+        "addressCountry": "RO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.6441,
+        "longitude": 25.6067
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "",
+        ""
+      ] 
+    }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-xl font-bold text-white">PGE <span class="text-accent">Brașov</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#servicii" class="text-gray-300 hover:text-white transition">Servicii</a>
+                <a href="#proces" class="text-gray-300 hover:text-white transition">Proces</a>
+                <a href="#portofoliu" class="text-gray-300 hover:text-white transition">Portofoliu</a>
+                <a href="#faq" class="text-gray-300 hover:text-white transition">FAQ</a>
+                <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="tel:+40752099005" class="bg-accent text-white px-4 py-2 rounded-md font-medium hover:bg-red-700 transition flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    Sună
+                </a>
+                <a href="https://wa.me/40752099005" class="bg-green-600 text-white px-4 py-2 rounded-md font-medium hover:bg-green-700 transition flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    WhatsApp
+                </a>
+            </div>
+            <button class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://example.com/workshop-video.webm" type="video/webm">
+            <source src="https://example.com/workshop-video.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="container mx-auto px-4 z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">Tuning calibrat și codări precise în <span class="text-accent">Brașov</span></h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10">ECU - TCU - Diagnoză - Retrofit. Putere când vrei, finețe când trebuie.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#calculator" class="bg-accent text-white px-8 py-4 rounded-md font-bold text-lg hover:bg-red-700 transition">Calculează prețul</a>
+                <a href="tel:+40752099005" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-md font-bold text-lg hover:bg-white hover:text-black transition">Sună acum</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Calculator -->
+    <section id="calculator" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Estimare preț în 30 de secunde</h2>
+                <p class="text-gray-400 text-lg">Completează detaliile mai jos pentru a primi o estimare preliminară</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto bg-gray-800 rounded-xl p-6 md:p-8 price-calculator">
+                <form id="priceForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="brand" class="block text-gray-300 mb-2">Marca</label>
+                            <input type="text" id="brand" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white" required>
+                        </div>
+                        <div>
+                            <label for="model" class="block text-gray-300 mb-2">Model</label>
+                            <input type="text" id="model" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="engine" class="block text-gray-300 mb-2">Motorizare</label>
+                            <input type="text" id="engine" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white" required>
+                        </div>
+                        <div>
+                            <label for="year" class="block text-gray-300 mb-2">An (opțional)</label>
+                            <input type="number" id="year" min="1990" max="2023" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="service" class="block text-gray-300 mb-2">Tip lucrare</label>
+                        <select id="service" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white" required>
+                            <option value="" disabled selected>Selectează serviciul</option>
+                            <option value="stage1">Stage 1 Tuning</option>
+                            <option value="stage2">Stage 2 Tuning</option>
+                            <option value="stage3">Stage 3 Tuning</option>
+                            <option value="eco">ECO Tuning</option>
+                            <option value="coding">Codări simple</option>
+                            <option value="coding_premium">Pachete codări premium</option>
+                            <option value="retrofit">Retrofit și module</option>
+                            <option value="immo">IMMO off</option>
+                            <option value="clone">Clonare ECU</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="vin" class="block text-gray-300 mb-2">VIN (opțional)</label>
+                        <input type="text" id="vin" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white">
+                        <p class="text-gray-400 text-sm mt-1">Nu știi ECU-ul? Lasă VIN-ul, îl aflăm noi.</p>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-accent text-white py-3 rounded-md font-bold hover:bg-red-700 transition">Calculează prețul</button>
+                </form>
+                
+                <div id="resultContainer" class="hidden mt-8">
+                    <div class="bg-gray-700 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-2">Estimarea ta:</h3>
+                        <p id="priceResult" class="text-3xl font-bold text-accent mb-4">1.200 lei</p>
+                        <p class="text-gray-300 mb-4">Oferta exactă se confirmă după diagnoză și loguri.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a id="whatsappBtn" href="#" class="flex-1 bg-green-600 text-white py-3 rounded-md font-medium hover:bg-green-700 transition flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                Trimite pe WhatsApp
+                            </a>
+                            <a href="tel:+40752099005" class="flex-1 bg-accent text-white py-3 rounded-md font-medium hover:bg-red-700 transition flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                Sună acum
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicii" class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Servicii profesionale de tuning și codări</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Specializare în soluții software pentru vehicule, de la optimizări simple la soluții complexe.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-900 rounded-xl p-6 service-card">
+                    <div class="text-accent mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">ECU/TCU Tuning</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Stage 1 - Optimizare performanță</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Stage 2 - Cu modificări hardware</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Stage 3 - Soluții personalizate</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>OBD, Bench sau Boot mode</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-gray-900 rounded-xl p-6 service-card">
+                    <div class="text-accent mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Diagnoză și Codări</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Diagnoză OE avansată</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Full coding - activare funcții</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>CP/SVM/DSS/SFD unlock</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>ECO tuning - optimizare consum</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-gray-900 rounded-xl p-6 service-card">
+                    <div class="text-accent mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Retrofit și Reparații</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Retrofit OEM</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>CarPlay / Android Auto</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Programare chei, airbag reset</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>IMMO off, clonări ECU/TCU</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Disclaimer -->
+            <div class="mt-16 bg-gray-800 border-l-4 border-accent p-6 rounded-r-lg">
+                <h3 class="text-xl font-bold mb-3 text-accent">Atentie importantă</h3>
+                <p class="text-gray-300">
+                    Anulări DPF, AdBlue, GPF/OPF, EGR: Aceste modificări sunt destinate exclusiv vehiculelor off-road sau competiție. 
+                    Utilizarea pe drumuri publice poate fi neconformă cu legislația în vigoare. 
+                    Clientul este responsabil pentru conformitate, ITP și omologare.
+                </p>
+                <p class="text-gray-300 mt-3">
+                    Orice scriere pe ECU implică risc minim controlat prin alimentare stabilă, backup și proceduri. 
+                    Nu garantăm rezultate pentru modificări care depășesc limitele fizice ale motorului.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Process -->
+    <section id="proces" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Procesul nostru de lucru</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Metodologii clare și verificări multiple pentru rezultate optime</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <!-- Progress line -->
+                    <div class="hidden md:block absolute left-8 top-0 bottom-0 w-1 bg-gray-700 transform -translate-x-1/2"></div>
+                    
+                    <!-- Step 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center mb-12">
+                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
+                            1
+                        </div>
+                        <div class="md:ml-8 flex-1">
+                            <h3 class="text-xl font-bold mb-2">Verificări inițiale și diagnoză</h3>
+                            <p class="text-gray-400">
+                                Analizăm starea curentă a vehiculului, verificăm erorile existente și stabilim parametrii de bază.
+                                Identificăm tipul de ECU și compatibilitatea cu serviciile solicitate.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="relative flex flex-col md:flex-row items-center mb-12">
+                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
+                            2
+                        </div>
+                        <div class="md:ml-8 flex-1">
+                            <h3 class="text-xl font-bold mb-2">Citire ECU - backup</h3>
+                            <p class="text-gray-400">
+                                Citim și salvăm configurația originală a ECU-ului într-un fișier sigur.
+                                Acest backup este esențial pentru orice eventualitate și este păstrat pentru client.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center mb-12">
+                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
+                            3
+                        </div>
+                        <div class="md:ml-8 flex-1">
+                            <h3 class="text-xl font-bold mb-2">Calibrare și scriere</h3>
+                            <p class="text-gray-400">
+                                Aplicăm modificările solicitate prin OBD sau Bench, în funcție de tipul de ECU.
+                                Folosim instrumente profesionale și software specializat pentru rezultate precise.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="relative flex flex-col md:flex-row items-center mb-12">
+                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
+                            4
+                        </div>
+                        <div class="md:ml-8 flex-1">
+                            <h3 class="text-xl font-bold mb-2">Test drive și loguri</h3>
+                            <p class="text-gray-400">
+                                Verificăm funcționalitatea în condiții reale de utilizare.
+                                Analizăm parametrii în timp real și ajustăm dacă este necesar.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
+                            5
+                        </div>
+                        <div class="md:ml-8 flex-1">
+                            <h3 class="text-xl font-bold mb-2">Suport post-lucrare</h3>
+                            <p class="text-gray-400">
+                                Oferim suport tehnic pentru eventuale ajustări rezonabile.
+                                Păstrăm backup-ul original pentru orice necesitate de rollback.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portofoliu" class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Portofoliu lucrări</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Mărci și modele cu care am lucrat recent</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Portfolio Item 1 -->
+                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
+                    <div class="h-48 bg-gray-800 flex items-center justify-center">
+                        <img src="https://example.com/vag.webp" alt="VAG Group" class="max-h-20 max-w-full">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold">VAG Group</h3>
+                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">Stage 2</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Audi, VW, Skoda, Seat</p>
+                        <p class="text-gray-300">Tuning ECU pentru performanță optimizată, cu menținerea fiabilității.</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
+                    <div class="h-48 bg-gray-800 flex items-center justify-center">
+                        <img src="https://example.com/bmw.webp" alt="BMW" class="max-h-20 max-w-full">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold">BMW</h3>
+                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">Full Coding</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Serii 1-8, X1-X7</p>
+                        <p class="text-gray-300">Activare funcții ascunse și retrofit sisteme multimedia.</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
+                    <div class="h-48 bg-gray-800 flex items-center justify-center">
+                        <img src="https://example.com/mercedes.webp" alt="Mercedes" class="max-h-20 max-w-full">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold">Mercedes</h3>
+                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">ECO Tuning</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Clasa A, C, E, GLE</p>
+                        <p class="text-gray-300">Optimizare consum combustibil fără sacrificarea performanței.</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
+                    <div class="h-48 bg-gray-800 flex items-center justify-center">
+                        <img src="https://example.com/ford.webp" alt="Ford" class="max-h-20 max-w-full">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold">Ford</h3>
+                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">Stage 1</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Focus, Fiesta, Kuga</p>
+                        <p class="text-gray-300">Remapare ECU pentru performanță sporită și răspuns mai bun la accelerație.</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
+                    <div class="h-48 bg-gray-800 flex items-center justify-center">
+                        <img src="https://example.com/psa.webp" alt="PSA" class="max-h-20 max-w-full">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold">PSA Group</h3>
+                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">DPF Off</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Peugeot, Citroën</p>
+                        <p class="text-gray-300">Soluții pentru vehicule de competiție sau off-road.</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
+                    <div class="h-48 bg-gray-800 flex items-center justify-center">
+                        <img src="https://example.com/opel.webp" alt="Opel" class="max-h-20 max-w-full">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold">Opel</h3>
+                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">IMMO Off</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Astra, Insignia</p>
+                        <p class="text-gray-300">Soluții pentru probleme de imobilizator și reprogramare chei.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <div class="inline-flex flex-wrap justify-center gap-4">
+                    <span class="bg-gray-800 text-white px-4 py-2 rounded-full text-sm">VAG Specialist</span>
+                    <span class="bg-gray-800 text-white px-4 py-2 rounded-full text-sm">BMW Coding</span>
+                    <span class="bg-gray-800 text-white px-4 py-2 rounded-full text-sm">Mercedes Retrofit</span>
+                    <span class="bg-gray-800 text-white px-4 py-2 rounded-full text-sm">Ford Performance</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Întrebări frecvente</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Răspunsuri la cele mai comune întrebări ale clienților</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                        <h3 class="text-lg font-medium">Ce este tuningul ECU și cum afectează mașina mea?</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-300">
+                            Tuningul ECU presupune modificarea parametrilor din calculatorul de bord al motorului (Engine Control Unit) 
+                            pentru a optimiza performanța, consumul sau caracteristicile de funcționare. Un tuning profesionist, 
+                            realizat pe baza datelor reale din teste, poate îmbunătăți semnificativ răspunsul la accelerație, 
+                            puterea maximă și experiența generală de condus, fără a afecta fiabilitatea motorului.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                        <h3 class="text-lg font-medium">Este legal tuningul ECU în România?</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-300">
+                            Tuningul ECU în sine este legal în România atâta timp cât nu modifică emisiile poluante peste limitele 
+                            permise de omologarea vehiculului. Modificări care afectează sistemele de control al emisiilor (DPF, 
+                            EGR, AdBlue) sunt permise doar pentru vehicule de competiție sau off-road. Este responsabilitatea 
+                            proprietarului să asigure conformitatea vehiculului pentru circulația pe drumurile publice.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                        <h3 class="text-lg font-medium">Cât durează o remapare ECU?</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-300">
+                            Durata variază în funcție de tipul de ECU și complexitatea lucrării. O remapare simplă Stage 1 prin 
+                            portul OBD poate dura între 1-3 ore, inclusiv diagnoza inițială și testele post-intervenție. 
+                            Pentru modele mai complexe care necesită deschiderea ECU-ului (bench tuning), procesul poate dura 
+                            între 3-6 ore. Recomandăm programarea în avans pentru a vă asigura că avem timpul necesar pentru 
+                            a lucra cu atenție la vehiculul dumneavoastră.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                        <h3 class="text-lg font-medium">Se pierde garanția la mașină după tuning?</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-300">
+                            Din punct de vedere legal, garanția poate fi afectată doar pentru componentele direct legate de 
+                            modificările efectuate. De exemplu, dacă un motor se defectează din cauza unui tuning agresiv, 
+                            producătorul poate refuza acoperirea garanției pentru motor. Totuși, alte componente ale vehiculului 
+                            care nu au legătură cu intervenția rămân în continuare acoperite. Este important să știți că 
+                            majoritatea intervențiilor noastre sunt reversibile și putem restabili software-ul original dacă 
+                            este necesar pentru service-ul autorizat.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="bg-gray-800 rounded-xl overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
+                        <h3 class="text-lg font-medium">Ce diferență este între Stage 1, Stage 2 și Stage 3?</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-6 hidden">
+                        <p class="text-gray-300">
+                            <strong>Stage 1</strong> este o optimizare a parametrilor existenti fără modificări hardware, potrivită pentru majoritatea șoferilor care doresc o îmbunătățire moderată a performanței. <br><br>
+                            <strong>Stage 2</strong> presupune de obicei modificări hardware minore (filtru de aer performant, evacuare sport) și o recalibrare mai agresivă a ECU-ului pentru rezultate superioare. <br><br>
+                            <strong>Stage 3</strong> implică modificări hardware extensive (turbocompresor mai mare, injectoare suplimentare, intercooler performant etc.) și o mapare complet personalizată. Aceste modificări sunt făcute la cerere și necesită discuții preliminare amănunțite.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map -->
+    <section id="contact" class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Programări și contact</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Suntem aici pentru orice întrebare sau programare</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Date de contact</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Telefon</h4>
+                                <p class="text-gray-300">+40 752 099 005</p>
+                                <p class="text-gray-400 text-sm">Program: Luni - Sâmbătă, 09:00 - 18:00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Email</h4>
+                                <p class="text-gray-300">contact@pge-brasov.ro</p>
+                                <p class="text-gray-400 text-sm">Răspundem în maxim 24 de ore</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Adresă</h4>
+                                <p class="text-gray-300">Strada Poienelor 11B, Brașov</p>
+                                <p class="text-gray-400 text-sm">Atelier local - programare recomandată</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-accent mr-4 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Program</h4>
+                                <p class="text-gray-300">Luni - Vineri: 09:00 - 18:00</p>
+                                <p class="text-gray-300">Sâmbătă: 09:00 - 14:00</p>
+                                <p class="text-gray-300">Duminică: Închis</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold text-lg mb-4">Contact rapid</h4>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="tel:+40752099005" class="bg-accent text-white px-6 py-3 rounded-md font-medium hover:bg-red-700 transition flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                Sună acum
+                            </a>
+                            <a href="https://wa.me/40752099005" class="bg-green-600 text-white px-6 py-3 rounded-md font-medium hover:bg-green-700 transition flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Localizare atelier</h3>
+                    <div class="map-container rounded-xl overflow-hidden">
+                        <img src="https://maps.googleapis.com/maps/api/staticmap?center=Strada+Poienelor+11B,Brașov&zoom=15&size=800x450&maptype=roadmap&markers=color:red%7CStrada+Poienelor+11B,Brașov&key=YOUR_API_KEY" alt="Harta locație PGE Brașov" class="map-image">
+                    </div>
+                    <p class="text-gray-300 mt-4 text-center">Strada Poienelor 11B, Brașov</p>
+                    
+                    <div class="mt-8 bg-gray-800 p-6 rounded-xl">
+                        <h4 class="font-bold text-lg mb-4">Informații firma</h4>
+                        <p class="text-gray-300 mb-2">Firmă operatoare: PRODUCTION GARAGE ENGINEERING S.R.L.</p>
+                        <p class="text-gray-300 mb-2">J40/2285/2018, sediu social în București, Sector 1</p>
+                        <p class="text-gray-300">Atelier local în Brașov: Strada Poienelor 11B</p>
+                        
+                        <div class="mt-6 pt-6 border-t border-gray-700">
+                            <h4 class="font-bold text-lg mb-4">Linkuri utile</h4>
+                            <div class="flex flex-wrap gap-4">
+                                <a href="#" class="text-gray-300 hover:text-accent transition">Termeni și condiții</a>
+                                <a href="#" class="text-gray-300 hover:text-accent transition">Politica GDPR</a>
+                                <a href="#" class="text-gray-300 hover:text-accent transition">Disclaimer emisii</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2">PGE <span class="text-accent">Brașov</span></h3>
+                    <p class="text-gray-400">Tuning calibrat și codări precise</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <div class="text-center md:text-right">
+                        <a href="tel:+40752099005" class="text-xl font-bold hover:text-accent transition">+40 752 099 005</a>
+                        <p class="text-gray-400 mt-1">Strada Poienelor 11B, Brașov
+</body>
+</html>
