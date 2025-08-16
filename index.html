@@ -1,400 +1,639 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ro" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuning ECU - TCU, Diagnoză, Codări - PGE Brașov</title>
+    <title>Tuning ECU – TCU, Diagnoză, Codări – PGE Brașov</title>
     <meta name="description" content="Tuning calibrat, codări, retrofit și diagnoză OE în Brașov. Estimează prețul în 30 secunde, apoi contactează rapid prin WhatsApp sau telefon.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pge-brasov.ro/">
+    <meta property="og:title" content="Tuning ECU – TCU, Diagnoză, Codări – PGE Brașov">
+    <meta property="og:description" content="Tuning calibrat, codări, retrofit și diagnoză OE în Brașov. Estimează prețul în 30 secunde.">
+    <meta property="og:image" content="https://pge-brasov.ro/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://pge-brasov.ro/">
+    <meta property="twitter:title" content="Tuning ECU – TCU, Diagnoză, Codări – PGE Brașov">
+    <meta property="twitter:description" content="Tuning calibrat, codări, retrofit și diagnoză OE în Brașov. Estimează prețul în 30 secunde.">
+    <meta property="twitter:image" content="https://pge-brasov.ro/images/og-image.jpg">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#000000',
-                        accent: '#dc2626',
-                    }
+                        primary: '#FF0000',
+                        dark: '#000000',
+                        light: '#FFFFFF',
+                        gray: {
+                            light: '#F3F4F6',
+                            DEFAULT: '#9CA3AF',
+                            dark: '#6B7280',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    },
                 }
             }
         }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.min.js"></script>
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-        }
-        .hero-video {
-            position: absolute;
+        /* Custom CSS for elements that can't be done with Tailwind */
+        .scroll-progress {
+            height: 4px;
+            background: #FF0000;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.4;
+            z-index: 9999;
+            transition: width 0.1s;
         }
+        
+        .neumorphism {
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5),
+                        -8px -8px 16px rgba(255, 255, 255, 0.05);
+        }
+        
+        .neumorphism-inset {
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.5),
+                        inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+        }
+        
         .service-card {
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .service-card:hover {
-            transform: translateY(-5px);
+        
+        @media (hover: hover) {
+            .service-card:hover {
+                transform: perspective(500px) rotateX(2deg) rotateY(2deg);
+                box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.6),
+                            -12px -12px 24px rgba(255, 255, 255, 0.1);
+            }
         }
-        .price-calculator {
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+        
+        .service-card:active {
+            transform: scale(0.98);
         }
-        .map-container {
-            position: relative;
-            overflow: hidden;
-            padding-top: 56.25%;
-        }
-        .map-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .social-card {
+        
+        .wow-button {
             transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0);
         }
-        .social-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.2);
+        
+        .wow-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
         }
-        .faq-toggle svg {
-            transition: transform 0.3s ease;
+        
+        .wow-button:active {
+            transform: scale(0.95);
         }
-        .faq-toggle:hover svg {
-            transform: translateY(2px);
+        
+        /* Accordion animation */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
         }
-        button svg, a svg {
-            transition: transform 0.3s ease;
+        
+        .accordion-content.open {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
         }
-        button:hover svg, a:hover svg {
-            transform: translateY(-3px);
+        
+        /* Parallax effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "AutoRepair",
-      "name": "Production Garage Engineering - PGE Brașov",
-      "image": "",
-      "@id": "",
-      "url": "",
-      "telephone": "+40752099005",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Strada Poienelor 11B",
-        "addressLocality": "Brașov",
-        "addressCountry": "RO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 45.6441,
-        "longitude": 25.6067
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "sameAs": [
-        "",
-        ""
-      ] 
-    }
-    </script>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="bg-dark text-light font-sans antialiased">
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Sticky WhatsApp button (mobile only) -->
+    <a href="https://wa.me/40752099005" aria-label="Contactați-ne pe WhatsApp" class="fixed bottom-6 right-6 z-50 md:hidden bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-transform transform hover:scale-110 active:scale-95">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.479 5.093 1.479 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
+    </a>
+    
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
+    <header id="header" class="fixed w-full z-40 transition-all duration-300 bg-transparent">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <span class="text-xl font-bold text-white">PGE <span class="text-accent">Brașov</span></span>
-            </div>
+            <a href="#" class="text-2xl font-bold flex items-center">
+                <span class="text-primary">PGE</span>
+                <span class="text-light">Brașov</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-8">
-                <a href="#servicii" class="text-gray-300 hover:text-white transition">Servicii</a>
-                <a href="#proces" class="text-gray-300 hover:text-white transition">Proces</a>
-                <a href="#portofoliu" class="text-gray-300 hover:text-white transition">Portofoliu</a>
-                <a href="#faq" class="text-gray-300 hover:text-white transition">FAQ</a>
-                <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
+                <a href="#home" class="text-light hover:text-primary transition">Acasă</a>
+                <a href="#services" class="text-light hover:text-primary transition">Servicii</a>
+                <a href="#calculator" class="text-light hover:text-primary transition">Calculator</a>
+                <a href="#portfolio" class="text-light hover:text-primary transition">Portofoliu</a>
+                <a href="#faq" class="text-light hover:text-primary transition">FAQ</a>
+                <a href="#contact" class="text-light hover:text-primary transition">Contact</a>
             </nav>
-            <div class="flex items-center space-x-4">
-<a href="tel:+40752099005"
-   class="bg-red-600 text-white px-4 py-2 text-sm rounded-lg font-bold hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center font-sans
-          md:px-6 md:py-3 md:text-base">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    Sună
-                </a>
-                <a href="https://wa.me/40752099005" 
-   class="bg-red-600 text-white px-4 py-2 text-sm rounded-lg font-bold hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center font-sans
-          md:px-6 md:py-3 md:text-base">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-                    WhatsApp
-                </a>
-            </div>
-            <button class="md:hidden text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            
+            <!-- Mobile Burger Menu -->
+            <button id="burgerBtn" class="md:hidden focus:outline-none" aria-label="Meniu mobil">
+                <svg class="w-8 h-8 text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
         </div>
+        
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobileMenu" class="hidden md:hidden bg-dark bg-opacity-95 w-full absolute top-full left-0 right-0 py-4 px-4">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="text-light hover:text-primary transition py-2 border-b border-gray-800">Acasă</a>
+                <a href="#services" class="text-light hover:text-primary transition py-2 border-b border-gray-800">Servicii</a>
+                <a href="#calculator" class="text-light hover:text-primary transition py-2 border-b border-gray-800">Calculator</a>
+                <a href="#portfolio" class="text-light hover:text-primary transition py-2 border-b border-gray-800">Portofoliu</a>
+                <a href="#faq" class="text-light hover:text-primary transition py-2 border-b border-gray-800">FAQ</a>
+                <a href="#contact" class="text-light hover:text-primary transition py-2">Contact</a>
+            </div>
+        </div>
     </header>
+    
+   <!-- Hero Section -->
+<section id="home" class="relative h-screen flex items-center justify-center bg-black overflow-hidden">
+    <!-- Background image -->
+    <img src="img/hero.webp" 
+         alt="Mașină de performanță" 
+         class="absolute inset-0 w-full h-full object-cover opacity-90 z-0">
 
-    <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <video autoplay muted loop class="hero-video">
-            <source src="https://example.com/workshop-video.webm" type="video/webm">
-            <source src="https://example.com/workshop-video.mp4" type="video/mp4">
-        </video>
-        <div class="absolute inset-0 bg-black/50"></div>
-        <div class="container mx-auto px-4 z-10 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">Tuning calibrat și codări precise în <span class="text-accent">Brașov</span></h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-10">ECU - TCU - Diagnoză - Retrofit. Putere când vrei, finețe când trebuie.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#calculator" class="bg-red-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20 hover:scale-105 active:scale-95 transition-all duration-300 font-sans">Calculează prețul</a>
-                <a href="tel:+40752099005" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-black hover:shadow-lg hover:shadow-white/20 hover:scale-105 active:scale-95 transition-all duration-300 font-sans">Sună acum</a>
-            </div>
+    <!-- Hero Content -->
+    <div class="container mx-auto px-4 z-10 relative text-center " >
+        <h1 class="text-4xl md:text-6xl font-bold mb-6" >
+            <span class="text-primary">Descoperă </span> adevăratul potențial 
+            <span class="text-primary">al mașinii</span> tale
+        </h1>
+        <p class="text-lg md:text-xl mb-8 text-gray-200">
+          
+        </p>
+        
+       <div class="mt-20"></div> 
+        <a href="#services" 
+           class="px-6 py-3 bg-primary text-white rounded-2xl shadow-lg hover:bg-primary/90 transition">
+            Vezi serviciile
+        </a>
+    </div>
+</section>
+
+        
+        <!-- Scroll down indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <a href="#services" aria-label="Derulează mai jos">
+                <svg class="w-8 h-8 text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
         </div>
     </section>
-
-    <!-- Price Calculator -->
-    <section id="calculator" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Estimare preț în 30 de secunde</h2>
-                <p class="text-gray-400 text-lg">Completează detaliile mai jos pentru a primi o estimare preliminară</p>
-            </div>
-            
-            <div class="max-w-2xl mx-auto bg-gray-800 rounded-xl p-6 md:p-8 price-calculator">
-                <form id="priceForm" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="brand" class="block text-gray-300 mb-2">Marca</label>
-                            <input type="text" id="brand" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white" required>
-                        </div>
-                        <div>
-                            <label for="model" class="block text-gray-300 mb-2">Model</label>
-                            <input type="text" id="model" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white" required>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="engine" class="block text-gray-300 mb-2">Motorizare</label>
-                            <input type="text" id="engine" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white" required>
-                        </div>
-                        <div>
-                            <label for="year" class="block text-gray-300 mb-2">An (opțional)</label>
-                            <input type="number" id="year" min="1990" max="2023" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="service" class="block text-gray-300 mb-2">Tip lucrare</label>
-                        <select id="service" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white" required>
-                            <option value="" disabled selected>Selectează serviciul</option>
-                            <option value="stage1">Stage 1 Tuning</option>
-                            <option value="stage2">Stage 2 Tuning</option>
-                            <option value="stage3">Stage 3 Tuning</option>
-                            <option value="eco">ECO Tuning</option>
-                            <option value="coding">Codări simple</option>
-                            <option value="coding_premium">Pachete codări premium</option>
-                            <option value="retrofit">Retrofit și module</option>
-                            <option value="immo">IMMO off</option>
-                            <option value="clone">Clonare ECU</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label for="vin" class="block text-gray-300 mb-2">VIN (opțional)</label>
-                        <input type="text" id="vin" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-accent text-white">
-                        <p class="text-gray-400 text-sm mt-1">Nu știi ECU-ul? Lasă VIN-ul, îl aflăm noi.</p>
-                    </div>
-                    
-                    <button type="submit" class="w-full bg-accent text-white py-3 rounded-md font-bold hover:bg-red-700 transition">Calculează prețul</button>
-                </form>
-                
-                <div id="resultContainer" class="hidden mt-8">
-                    <div class="bg-gray-700 p-6 rounded-lg">
-                        <h3 class="text-xl font-bold mb-2">Estimarea ta:</h3>
-                        <p id="priceResult" class="text-3xl font-bold text-accent mb-4">1.200 lei</p>
-                        <p class="text-gray-300 mb-4">Oferta exactă se confirmă după diagnoză și loguri.</p>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a id="whatsappBtn" href="#" class="flex-1 bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center font-sans">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                </svg>
-                                Trimite pe WhatsApp
-                            </a>
-                            <a href="tel:+40752099005" class="flex-1 bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center font-sans">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
-                                Sună acum
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Services Section -->
-    <section id="servicii" class="py-20 bg-black">
+    <section id="services" class="py-20 bg-dark">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Servicii profesionale de tuning și codări</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Specializare în soluții software pentru vehicule, de la optimizări simple la soluții complexe.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Serviciile noastre</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Oferim soluții complete pentru toate nevoile dumneavoastră auto, de la tuning performant la reparații electronice complexe.
+                </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Services Accordion -->
+            <div class="max-w-4xl mx-auto space-y-6">
                 <!-- Service 1 -->
-                <div class="bg-gray-900 rounded-xl p-6 service-card">
-                    <div class="text-accent mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service1-content">
+                        <span class="text-xl font-semibold">🏎 CAR – TRUCK – HEAVY DUTY  🚜</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
+                    </button>
+                    <div id="service1-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            Servicii complete pentru toate tipurile de vehicule, de la mașini de pasageri la camioane și echipamente grele. Specializări pentru fiecare categorie, inclusiv optimizări specifice pentru vehiculele comerciale.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">ECU/TCU Tuning</h3>
-                    <ul class="text-gray-300 space-y-2">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>Stage 1 - Optimizare performanță</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>Stage 2 - Cu modificări hardware</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>Stage 3 - Soluții personalizate</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>OBD, Bench sau Boot mode</span>
-                        </li>
-                    </ul>
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="bg-gray-900 rounded-xl p-6 service-card">
-                    <div class="text-accent mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service2-content">
+                        <span class="text-xl font-semibold">⚡ Software – Electronică – Electrică</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
+                    </button>
+                    <div id="service2-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            Diagnosticare și reparare sisteme electronice auto: borduri, calculatoare, module de comandă. Soluții pentru probleme electrice: scurtcircuite, întreruperi, relee defecte. Programare și adaptare module noi.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Diagnoză și Codări</h3>
-                    <ul class="text-gray-300 space-y-2">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>Diagnoză OE avansată</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>Full coding - activare funcții</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>CP/SVM/DSS/SFD unlock</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>ECO tuning - optimizare consum</span>
-                        </li>
-                    </ul>
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="bg-gray-900 rounded-xl p-6 service-card">
-                    <div class="text-accent mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service3-content">
+                        <span class="text-xl font-semibold">🔋 ECU/TCU Tuning – Stage 1/2/3</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
+                    </button>
+                    <div id="service3-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            Tuning ECU/TCU pentru performanță/eficiență: timpi injecție, presiune turbo, turații, răspuns accelerație. Etape: (1) citire soft OBD/BDM/Bench/Bootmode; (2) optimizare mape (injecție, avans, limitatori); (3) scriere + test; (4) verificare siguranță/fiabilitate.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Retrofit și Reparații</h3>
-                    <ul class="text-gray-300 space-y-2">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>Retrofit OEM</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>CarPlay / Android Auto</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>Programare chei, airbag reset</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span>IMMO off, clonări ECU/TCU</span>
-                        </li>
-                    </ul>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service4-content">
+                        <span class="text-xl font-semibold">✅ AdBlue • DPF • OPF • GPF • EGR</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="service4-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            Dezactivare funcții de control/diagnoză pentru sisteme de emisii (AdBlue, DPF/GPF/OPF, EGR) pentru vehicule off-road/competiție. Avantaj: elimină erori/mode avarie cauzate de defecte la aceste sisteme.
+                        </p>
+                        <div class="mt-4 p-4 bg-gray-800 rounded-lg neumorphism-inset">
+                            <p class="text-red-400 font-medium">
+                                <strong>Disclaimer legal:</strong> Modificările pot fi neconforme pe drumuri publice; responsabilitatea aparține clientului. Servicii destinate exclusiv vehiculelor off-road/competiție.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service5-content">
+                        <span class="text-xl font-semibold">💻 Diagnoză O.E. • CP/SVM/DSS/SFD</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="service5-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            ODIS/ISTA+/Xentry pentru codări, adaptări, update-uri. CP (VAG), SVM/DSS (calibrări VAG), SFD unlock (MQB Evo). Diagnosticare profundă cu echipamente originale pentru identificarea precisă a defecțiunilor.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service6-content">
+                        <span class="text-xl font-semibold">👨🏻‍💻 Full Coding • Funcții ascunse</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="service6-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            Activări funcții comfort/infotainment/siguranță: Coming/Leaving Home, Needle Sweep, Adaptive Brake Lights, dezactivare Start/Stop, meniuri avansate (ex. AMG/Launch Control – dacă e suportat HW). Personalizări complete la cerere.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Service 7 -->
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service7-content">
+                        <span class="text-xl font-semibold">🔐 Programare chei auto • Keyless</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="service7-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            Chei noi/duplicate, codare telecomandă, sincronizare imobilizator (OBD/banc). PIN/CS ECU/BCM, soluții keyless GO/smart key. Recuperare chei pierdute, programare chei de rezervă, reparare telecomenzi defecte.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Service 8 -->
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service8-content">
+                        <span class="text-xl font-semibold">📲 Apple CarPlay • Android Auto</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="service8-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            Verificare compatibilitate HU (MIB/NTG/NBT etc.), activare prin codare/script/licență, testare USB/wireless. Integrare perfectă a smartphone-ului în sistemul multimedia al vehiculului.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Service 9 -->
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service9-content">
+                        <span class="text-xl font-semibold">🆘 Airbag Crash RESET</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="service9-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            Citire EEPROM/MCU (ex. 95160, SPC560), ștergere date crash, rescriere și test. Resetare module airbag după accident, reparare module defecte, înlocuire senzori.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Service 10 -->
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service10-content">
+                        <span class="text-xl font-semibold">📟 FRM • CAS/ELV • IMMO OFF</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="service10-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            Reparare și adaptare FRM3 (EEPROM corupt), CAS3/4 (chei, ISN, DME), ELV (reparație/înlocuire), IMMO OFF pentru adaptări tehnice. Soluții pentru probleme de imobilizator, blocări volan, defecte module de comandă.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Service 11 -->
+                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service11-content">
+                        <span class="text-xl font-semibold">🌍 UPDATE MAPS VAG • BMW</span>
+                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="service11-content" class="accordion-content mt-4">
+                        <p class="text-gray-300">
+                            VAG (MIB/MIB2) prin SD sau activări; BMW (NBT/NBT EVO) cu FSC/USB. Pași: VIN + versiune, cod FSC/fișiere, instalare USB/SD. Actualizări hărți navigație pentru toate regiunile, activări permanente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Price Calculator Section -->
+    <section id="calculator" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Calculator de preț</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Estimează rapid costul serviciilor noastre. Completează detaliile mai jos și vei primi o estimare pe loc.
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto bg-gray-800 rounded-xl p-8 neumorphism">
+                <form id="priceCalculator" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="brand" class="block text-gray-300 mb-2">Marca vehiculului</label>
+                            <select id="brand" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option value="">Selectează marca</option>
+                                <option value="audi">Audi</option>
+                                <option value="bmw">BMW</option>
+                                <option value="mercedes">Mercedes</option>
+                                <option value="volkswagen">Volkswagen</option>
+                                <option value="skoda">Skoda</option>
+                                <option value="seat">SEAT</option>
+                                <option value="opel">Opel</option>
+                                <option value="ford">Ford</option>
+                                <option value="renault">Renault</option>
+                                <option value="dacia">Dacia</option>
+                                <option value="other">Altă marcă</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="model" class="block text-gray-300 mb-2">Model</label>
+                            <input type="text" id="model" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Introdu modelul">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label for="engine" class="block text-gray-300 mb-2">Motorizare</label>
+                            <input type="text" id="engine" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Ex: 2.0 TDI">
+                        </div>
+                        
+                        <div>
+                            <label for="year" class="block text-gray-300 mb-2">An fabricație</label>
+                            <input type="number" id="year" min="1990" max="2023" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Ex: 2018">
+                        </div>
+                        
+                        <div>
+                            <label for="vin" class="block text-gray-300 mb-2">VIN (opțional)</label>
+                            <input type="text" id="vin" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Număr de șasiu">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="serviceType" class="block text-gray-300 mb-2">Tip serviciu</label>
+                        <select id="serviceType" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="">Selectează serviciul</option>
+                            <option value="stage1">Stage 1 Tuning</option>
+                            <option value="stage2">Stage 2 Tuning</option>
+                            <option value="stage3">Stage 3 Tuning</option>
+                            <option value="eco">Tuning ECO (consum redus)</option>
+                            <option value="dpf">DPF/AdBlue/EGR OFF</option>
+                            <option value="coding">Codări/Adaptări</option>
+                            <option value="carplay">Activare CarPlay/Android Auto</option>
+                            <option value="key">Programare chei</option>
+                            <option value="diagnostic">Diagnostic complet</option>
+                            <option value="crash">Airbag Crash Reset</option>
+                            <option value="immo">IMMO OFF/Reparare</option>
+                            <option value="maps">Update hărți navigație</option>
+                        </select>
+                    </div>
+                    
+                    <div id="priceResult" class="hidden bg-gray-900 rounded-lg p-6 neumorphism-inset">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="text-xl font-bold text-primary">Estimare preț</h3>
+                                <p id="estimatedPrice" class="text-3xl font-bold mt-2">0 RON</p>
+                                <p id="serviceDescription" class="text-gray-300 mt-1"></p>
+                            </div>
+                            <div class="flex space-x-4">
+                                <button type="button" id="whatsappBtn" class="wow-button bg-green-600 text-white font-bold py-3 px-6 rounded-lg flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.479 5.093 1.479 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                    </svg>
+                                    WhatsApp
+                                </button>
+                                <button type="button" id="callBtn" class="wow-button bg-primary text-white font-bold py-3 px-6 rounded-lg flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20 22.621l-3.521-3.52a1.5 1.5 0 0 0-1.061-.439h-1.916a11.042 11.042 0 1 1-4.783-10.224 1.5 1.5 0 0 0 1.391.911h2.049a1.5 1.5 0 0 0 1.061-.439l1.476-1.475a1.5 1.5 0 0 0-.439-2.45 12.569 12.569 0 0 0-5.846-1.412 12.6 12.6 0 0 0-8.996 3.723 12.6 12.6 0 0 0-3.726 8.996 12.6 12.6 0 0 0 3.723 8.996 12.6 12.6 0 0 0 8.996 3.726c4.486 0 8.612-2.562 10.621-6.6l-3.528-3.527z"/>
+                                    </svg>
+                                    Sună acum
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <button type="submit" class="wow-button w-full bg-primary text-white font-bold py-4 px-6 rounded-lg">
+                            Calculează preț
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Portofoliu</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Lucrările noastre recente și proiecte de succes. Fiecare vehicul este unic și primește atenția necesară.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item bg-gray-900 rounded-xl overflow-hidden neumorphism animate-slide-up">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Audi RS6 tuning" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white">Audi RS6 Stage 3</h3>
+                            <p class="text-gray-300">780CP | 1000Nm</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item bg-gray-900 rounded-xl overflow-hidden neumorphism animate-slide-up">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="BMW M5 tuning" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white">BMW M5 F90 Stage 2</h3>
+                            <p class="text-gray-300">720CP | 850Nm</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item bg-gray-900 rounded-xl overflow-hidden neumorphism animate-slide-up">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Mercedes AMG tuning" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white">Mercedes AMG E63S</h3>
+                            <p class="text-gray-300">750CP | 950Nm</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item bg-gray-900 rounded-xl overflow-hidden neumorphism animate-slide-up">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="VW Golf R tuning" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white">VW Golf R Stage 2</h3>
+                            <p class="text-gray-300">380CP | 500Nm</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item bg-gray-900 rounded-xl overflow-hidden neumorphism animate-slide-up">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Porsche 911 tuning" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white">Porsche 911 Turbo S</h3>
+                            <p class="text-gray-300">680CP | 800Nm</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item bg-gray-900 rounded-xl overflow-hidden neumorphism animate-slide-up">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Audi S4 tuning" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                             loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-xl font-bold text-white">Audi S4 B9 Stage 1</h3>
+                            <p class="text-gray-300">420CP | 600Nm</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Disclaimer -->
-            <div class="mt-16 bg-gray-800 border-l-4 border-accent p-6 rounded-r-lg">
-                <h3 class="text-xl font-bold mb-3 text-accent">Atentie importantă</h3>
-                <p class="text-gray-300">
-                    Anulări DPF, AdBlue, GPF/OPF, EGR: Aceste modificări sunt destinate exclusiv vehiculelor off-road sau competiție. 
-                    Utilizarea pe drumuri publice poate fi neconformă cu legislația în vigoare. 
-                    Clientul este responsabil pentru conformitate, ITP și omologare.
-                </p>
-                <p class="text-gray-300 mt-3">
-                    Orice scriere pe ECU implică risc minim controlat prin alimentare stabilă, backup și proceduri. 
-                    Nu garantăm rezultate pentru modificări care depășesc limitele fizice ale motorului.
-                </p>
+            <div class="text-center mt-12">
+                <a href="#contact" class="wow-button inline-block bg-primary text-white font-bold py-3 px-8 rounded-lg">
+                    Programează-te acum
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Work Process -->
+     <!-- Work Process -->
     <section id="proces" class="py-20 bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -481,360 +720,198 @@
         </div>
     </section>
 
-    <!-- Portfolio -->
-    <section id="portofoliu" class="py-20 bg-black">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Portofoliu lucrări</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Mărci și modele cu care am lucrat recent</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Portfolio Item 1 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
-                    <div class="h-48 bg-gray-800 flex items-center justify-center">
-                        <img src="https://example.com/vag.webp" alt="VAG Group" class="max-h-20 max-w-full">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-bold">VAG Group</h3>
-                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">Stage 2</span>
-                        </div>
-                        <p class="text-gray-400 text-sm mb-3">Audi, VW, Skoda, Seat</p>
-                        <p class="text-gray-300">Tuning ECU pentru performanță optimizată, cu menținerea fiabilității.</p>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 2 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
-                    <div class="h-48 bg-gray-800 flex items-center justify-center">
-                        <img src="https://example.com/bmw.webp" alt="BMW" class="max-h-20 max-w-full">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-bold">BMW</h3>
-                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">Full Coding</span>
-                        </div>
-                        <p class="text-gray-400 text-sm mb-3">Serii 1-8, X1-X7</p>
-                        <p class="text-gray-300">Activare funcții ascunse și retrofit sisteme multimedia.</p>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 3 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
-                    <div class="h-48 bg-gray-800 flex items-center justify-center">
-                        <img src="https://example.com/mercedes.webp" alt="Mercedes" class="max-h-20 max-w-full">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-bold">Mercedes</h3>
-                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">ECO Tuning</span>
-                        </div>
-                        <p class="text-gray-400 text-sm mb-3">Clasa A, C, E, GLE</p>
-                        <p class="text-gray-300">Optimizare consum combustibil fără sacrificarea performanței.</p>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 4 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
-                    <div class="h-48 bg-gray-800 flex items-center justify-center">
-                        <img src="https://example.com/ford.webp" alt="Ford" class="max-h-20 max-w-full">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-bold">Ford</h3>
-                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">Stage 1</span>
-                        </div>
-                        <p class="text-gray-400 text-sm mb-3">Focus, Fiesta, Kuga</p>
-                        <p class="text-gray-300">Remapare ECU pentru performanță sporită și răspuns mai bun la accelerație.</p>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 5 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
-                    <div class="h-48 bg-gray-800 flex items-center justify-center">
-                        <img src="https://example.com/psa.webp" alt="PSA" class="max-h-20 max-w-full">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-bold">PSA Group</h3>
-                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">DPF Off</span>
-                        </div>
-                        <p class="text-gray-400 text-sm mb-3">Peugeot, Citroën</p>
-                        <p class="text-gray-300">Soluții pentru vehicule de competiție sau off-road.</p>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 6 -->
-                <div class="bg-gray-900 rounded-xl overflow-hidden social-card">
-                    <div class="h-48 bg-gray-800 flex items-center justify-center">
-                        <img src="https://example.com/opel.webp" alt="Opel" class="max-h-20 max-w-full">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-bold">Opel</h3>
-                            <span class="bg-gray-700 text-accent text-xs px-2 py-1 rounded">IMMO Off</span>
-                        </div>
-                        <p class="text-gray-400 text-sm mb-3">Astra, Insignia</p>
-                        <p class="text-gray-300">Soluții pentru probleme de imobilizator și reprogramare chei.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <div class="inline-flex flex-wrap justify-center gap-4">
-                    <span class="bg-gray-800 text-white px-4 py-2 rounded-full text-sm">VAG Specialist</span>
-                    <span class="bg-gray-800 text-white px-4 py-2 rounded-full text-sm">BMW Coding</span>
-                    <span class="bg-gray-800 text-white px-4 py-2 rounded-full text-sm">Mercedes Retrofit</span>
-                    <span class="bg-gray-800 text-white px-4 py-2 rounded-full text-sm">Ford Performance</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
+    
+    <!-- FAQ Section -->
     <section id="faq" class="py-20 bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Întrebări frecvente</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Răspunsuri la cele mai comune întrebări ale clienților</p>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Răspunsuri la cele mai comune întrebări despre serviciile noastre.
+                </p>
             </div>
             
             <div class="max-w-3xl mx-auto space-y-6">
                 <!-- FAQ Item 1 -->
-                <div class="bg-gray-800 rounded-xl overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                        <h3 class="text-lg font-medium">Ce este tuningul ECU și cum afectează mașina mea?</h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <div class="bg-gray-800 rounded-xl p-6 neumorphism">
+                    <button class="faq-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="faq1-content">
+                        <span class="text-xl font-semibold text-left">Tuning-ul afectează fiabilitatea motorului?</span>
+                        <svg class="faq-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div class="faq-content px-6 pb-6 hidden">
+                    <div id="faq1-content" class="faq-content mt-4">
                         <p class="text-gray-300">
-                            Tuningul ECU presupune modificarea parametrilor din calculatorul de bord al motorului (Engine Control Unit) 
-                            pentru a optimiza performanța, consumul sau caracteristicile de funcționare. Un tuning profesionist, 
-                            realizat pe baza datelor reale din teste, poate îmbunătăți semnificativ răspunsul la accelerație, 
-                            puterea maximă și experiența generală de condus, fără a afecta fiabilitatea motorului.
+                            Un tuning profesionist, realizat de specialiști, nu afectează fiabilitatea motorului atunci când sunt respectate limitele constructive ale acestuia. Noi folosim soluții testate și adaptăm parametrii în funcție de specificul fiecărui motor, menținând un echilibru optim între performanță și fiabilitate.
                         </p>
                     </div>
                 </div>
                 
                 <!-- FAQ Item 2 -->
-                <div class="bg-gray-800 rounded-xl overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                        <h3 class="text-lg font-medium">Este legal tuningul ECU în România?</h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <div class="bg-gray-800 rounded-xl p-6 neumorphism">
+                    <button class="faq-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="faq2-content">
+                        <span class="text-xl font-semibold text-left">Se poate detecta tuning-ul la ITP?</span>
+                        <svg class="faq-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div class="faq-content px-6 pb-6 hidden">
+                    <div id="faq2-content" class="faq-content mt-4">
                         <p class="text-gray-300">
-                            Tuningul ECU în sine este legal în România atâta timp cât nu modifică emisiile poluante peste limitele 
-                            permise de omologarea vehiculului. Modificări care afectează sistemele de control al emisiilor (DPF, 
-                            EGR, AdBlue) sunt permise doar pentru vehicule de competiție sau off-road. Este responsabilitatea 
-                            proprietarului să asigure conformitatea vehiculului pentru circulația pe drumurile publice.
+                            În mod normal, un tuning software nu este detectabil la ITP, deoarece testele efectuate nu verifică softul motorului. Totuși, pentru modificări majore (stage 2+) sau dezactivări DPF/AdBlue/EGR, recomandăm să consultați legislația în vigoare. Noi oferim soluții reversible pentru toate intervențiile.
                         </p>
                     </div>
                 </div>
                 
                 <!-- FAQ Item 3 -->
-                <div class="bg-gray-800 rounded-xl overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                        <h3 class="text-lg font-medium">Cât durează o remapare ECU?</h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <div class="bg-gray-800 rounded-xl p-6 neumorphism">
+                    <button class="faq-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="faq3-content">
+                        <span class="text-xl font-semibold text-left">Pierd garanția de fabrică dacă fac tuning?</span>
+                        <svg class="faq-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div class="faq-content px-6 pb-6 hidden">
+                    <div id="faq3-content" class="faq-content mt-4">
                         <p class="text-gray-300">
-                            Durata variază în funcție de tipul de ECU și complexitatea lucrării. O remapare simplă Stage 1 prin 
-                            portul OBD poate dura între 1-3 ore, inclusiv diagnoza inițială și testele post-intervenție. 
-                            Pentru modele mai complexe care necesită deschiderea ECU-ului (bench tuning), procesul poate dura 
-                            între 3-6 ore. Recomandăm programarea în avans pentru a vă asigura că avem timpul necesar pentru 
-                            a lucra cu atenție la vehiculul dumneavoastră.
+                            Da, modificarea softului original poate anula garanția de fabrică pentru componentele afectate. Totuși, noi folosim metode non-invasive și păstrăm o copie a softului original, pe care îl putem restaura oricând pentru vizitele la dealer. Pentru mașinile în garanție, recomandăm consultarea termenilor contractului de garanție înainte de orice intervenție.
                         </p>
                     </div>
                 </div>
                 
                 <!-- FAQ Item 4 -->
-                <div class="bg-gray-800 rounded-xl overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                        <h3 class="text-lg font-medium">Se pierde garanția la mașină după tuning?</h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <div class="bg-gray-800 rounded-xl p-6 neumorphism">
+                    <button class="faq-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="faq4-content">
+                        <span class="text-xl font-semibold text-left">Cât durează un proces de tuning?</span>
+                        <svg class="faq-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div class="faq-content px-6 pb-6 hidden">
+                    <div id="faq4-content" class="faq-content mt-4">
                         <p class="text-gray-300">
-                            Din punct de vedere legal, garanția poate fi afectată doar pentru componentele direct legate de 
-                            modificările efectuate. De exemplu, dacă un motor se defectează din cauza unui tuning agresiv, 
-                            producătorul poate refuza acoperirea garanției pentru motor. Totuși, alte componente ale vehiculului 
-                            care nu au legătură cu intervenția rămân în continuare acoperite. Este important să știți că 
-                            majoritatea intervențiilor noastre sunt reversibile și putem restabili software-ul original dacă 
-                            este necesar pentru service-ul autorizat.
+                            Durata variază în funcție de complexitatea intervenției:
+                            <ul class="list-disc pl-5 mt-2 space-y-2 text-gray-300">
+                                <li>Tuning Stage 1: 2-4 ore</li>
+                                <li>Tuning Stage 2: 4-8 ore</li>
+                                <li>Tuning Stage 3: 1-2 zile</li>
+                                <li>Codări/Adaptări: 1-2 ore</li>
+                                <li>Diagnostic complex: 1-3 ore</li>
+                            </ul>
+                            Pentru programări, vă rugăm să ne contactați cu cel puțin 24 de ore în avans.
                         </p>
                     </div>
                 </div>
                 
                 <!-- FAQ Item 5 -->
-                <div class="bg-gray-800 rounded-xl overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left">
-                        <h3 class="text-lg font-medium">Ce diferență este între Stage 1, Stage 2 și Stage 3?</h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <div class="bg-gray-800 rounded-xl p-6 neumorphism">
+                    <button class="faq-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="faq5-content">
+                        <span class="text-xl font-semibold text-left">Ce avantaje oferă un tuning Stage 1?</span>
+                        <svg class="faq-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    <div class="faq-content px-6 pb-6 hidden">
+                    <div id="faq5-content" class="faq-content mt-4">
                         <p class="text-gray-300">
-                            <strong>Stage 1</strong> este o optimizare a parametrilor existenti fără modificări hardware, potrivită pentru majoritatea șoferilor care doresc o îmbunătățire moderată a performanței. <br><br>
-                            <strong>Stage 2</strong> presupune de obicei modificări hardware minore (filtru de aer performant, evacuare sport) și o recalibrare mai agresivă a ECU-ului pentru rezultate superioare. <br><br>
-                            <strong>Stage 3</strong> implică modificări hardware extensive (turbocompresor mai mare, injectoare suplimentare, intercooler performant etc.) și o mapare complet personalizată. Aceste modificări sunt făcute la cerere și necesită discuții preliminare amănunțite.
+                            Tuning Stage 1 este cea mai populară variantă, oferind:
+                            <ul class="list-disc pl-5 mt-2 space-y-2 text-gray-300">
+                                <li>Creștere de 15-30% în putere și cuplu</li>
+                                <li>Răspuns mai bun la accelerație</li>
+                                <li>Optimizare a consumului (în condiții de conducere normală)</li>
+                                <li>Eliminare limitări artificiale impuse de producător</li>
+                                <li>Compatibilitate cu piese originale</li>
+                                <li>Posibilitate de revenire la softul original oricând</li>
+                            </ul>
+                            Toate acestea fără modificări hardware și cu risc minim pentru fiabilitate.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Contact & Map -->
-    <section id="contact" class="py-20 bg-black">
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Programări și contact</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Suntem aici pentru orice întrebare sau programare</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Contact</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Programează o vizită sau solicită o ofertă personalizată pentru nevoile tale.
+                </p>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="bg-gray-900 rounded-xl p-8 neumorphism h-fit">
                     <h3 class="text-2xl font-bold mb-6">Date de contact</h3>
                     
                     <div class="space-y-6">
                         <div class="flex items-start">
-                            <div class="text-accent mr-4 mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1">Telefon</h4>
-                                <p class="text-gray-300">+40 752 099 005</p>
-                                <p class="text-gray-400 text-sm">Program: Luni - Sâmbătă, 09:00 - 18:00</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="text-accent mr-4 mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1">Email</h4>
-                                <p class="text-gray-300">contact@pge-brasov.ro</p>
-                                <p class="text-gray-400 text-sm">Răspundem în maxim 24 de ore</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="text-accent mr-4 mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <div class="bg-primary bg-opacity-20 p-3 rounded-lg mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-lg mb-1">Adresă</h4>
-                                <p class="text-gray-300">Strada Poienelor 11B, Brașov</p>
-                                <p class="text-gray-400 text-sm">Atelier local - programare recomandată</p>
+                                <h4 class="text-lg font-semibold">Adresă</h4>
+                                <p class="text-gray-300">Str. Poienelor 11B, Brașov</p>
                             </div>
                         </div>
                         
                         <div class="flex items-start">
-                            <div class="text-accent mr-4 mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <div class="bg-primary bg-opacity-20 p-3 rounded-lg mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold">Telefon</h4>
+                                <p class="text-gray-300">+40 752 099 005</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary bg-opacity-20 p-3 rounded-lg mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold">Email</h4>
+                                <p class="text-gray-300">contact@pge-brasov.ro</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary bg-opacity-20 p-3 rounded-lg mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-lg mb-1">Program</h4>
+                                <h4 class="text-lg font-semibold">Program</h4>
                                 <p class="text-gray-300">Luni - Vineri: 09:00 - 18:00</p>
-                                <p class="text-gray-300">Sâmbătă: 09:00 - 14:00</p>
+                                <p class="text-gray-300">Sâmbătă: 10:00 - 14:00</p>
                                 <p class="text-gray-300">Duminică: Închis</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="mt-8">
-                        <h4 class="font-bold text-lg mb-4">Contact rapid</h4>
-                        <div class="flex flex-wrap gap-4">
-                            <a href="tel:+40752099005" class="bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center font-sans">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        <h4 class="text-lg font-semibold mb-4">Urmărește-ne</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" aria-label="Facebook" class="bg-gray-800 hover:bg-primary text-light p-3 rounded-full transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
                                 </svg>
-                                Sună acum
                             </a>
-                            <a href="https://wa.me/40752099005" class="bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/20 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center font-sans">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            <a href="#" aria-label="Instagram" class="bg-gray-800 hover:bg-primary text-light p-3 rounded-full transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                                 </svg>
-                                WhatsApp
                             </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-2xl font-bold mb-6">Localizare atelier</h3>
-                    <div class="map-container rounded-xl overflow-hidden">
-                        <img src="https://maps.googleapis.com/maps/api/staticmap?center=Strada+Poienelor+11B,Brașov&zoom=15&size=800x450&maptype=roadmap&markers=color:red%7CStrada+Poienelor+11B,Brașov&key=YOUR_API_KEY" alt="Harta locație PGE Brașov" class="map-image">
-                    </div>
-                    <p class="text-gray-300 mt-4 text-center">Strada Poienelor 11B, Brașov</p>
-                    
-                    <div class="mt-8 bg-gray-800 p-6 rounded-xl">
-                        <h4 class="font-bold text-lg mb-4">Informații firma</h4>
-                        <p class="text-gray-300 mb-2">Firmă operatoare: PRODUCTION GARAGE ENGINEERING S.R.L.</p>
-                        <p class="text-gray-300 mb-2">J40/2285/2018, sediu social în București, Sector 1</p>
-                        <p class="text-gray-300">Atelier local în Brașov: Strada Poienelor 11B</p>
-                        
-                        <div class="mt-6 pt-6 border-t border-gray-700">
-                            <h4 class="font-bold text-lg mb-4">Linkuri utile</h4>
-                            <div class="flex flex-wrap gap-4">
-                                <a href="#" class="text-gray-300 hover:text-accent transition">Termeni și condiții</a>
-                                <a href="#" class="text-gray-300 hover:text-accent transition">Politica GDPR</a>
-                                <a href="#" class="text-gray-300 hover:text-accent transition">Disclaimer emisii</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-12">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <h3 class="text-2xl font-bold mb-2">PGE <span class="text-accent">Brașov</span></h3>
-                    <p class="text-gray-400">Tuning calibrat și codări precise</p>
-                </div>
-                
-                <div class="flex flex-col items-center md:items-end">
-                    <div class="flex space-x-4 mb-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                            </svg>
-                        </a>
-                    </div>
-                    
-                    <div class="text-center md:text-right">
-                        <a href="tel:+40752099005" class="text-xl font-bold hover:text-accent transition">+40 752 099 005</a>
-                        <p class="text-gray-400 mt-1">Strada Poienelor 11B, Brașov
+                            <a href="https://wa.me/40752099005" aria-label="WhatsApp" class="bg-gray-800 hover:bg-green-600 text-light p-3 rounded-full transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.479 5.093 1.479 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194
 </body>
 </html>
