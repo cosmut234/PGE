@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tuning ECU – TCU, Diagnoză, Codări – PGE Brașov</title>
     <meta name="description" content="Tuning calibrat, codări, retrofit și diagnoză OE în Brașov. Estimează prețul în 30 secunde, apoi contactează rapid prin WhatsApp sau telefon.">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pge-brasov.ro/">
@@ -68,6 +69,18 @@
     <!-- Three.js -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.min.js"></script>
+    <style>
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out;
+}
+.accordion-content.expanded {
+    max-height: 500px; /* valoare simbolică – va fi înlocuită de JS */
+}
+</style>
+    
+    
     
     <style>
         /* Custom CSS for elements that can't be done with Tailwind */
@@ -258,183 +271,192 @@
                 </p>
             </div>
             
-            <!-- Services Accordion -->
-            <div class="max-w-4xl mx-auto space-y-6">
-                <!-- Service 1 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service1-content">
-                        <span class="text-xl font-semibold">🏎 CAR – TRUCK – HEAVY DUTY  🚜</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service1-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            Servicii complete pentru toate tipurile de vehicule, de la mașini de pasageri la camioane și echipamente grele. Specializări pentru fiecare categorie, inclusiv optimizări specifice pentru vehiculele comerciale.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service2-content">
-                        <span class="text-xl font-semibold">⚡ Software – Electronică – Electrică</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service2-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            Diagnosticare și reparare sisteme electronice auto: borduri, calculatoare, module de comandă. Soluții pentru probleme electrice: scurtcircuite, întreruperi, relee defecte. Programare și adaptare module noi.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service3-content">
-                        <span class="text-xl font-semibold">🔋 ECU/TCU Tuning – Stage 1/2/3</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service3-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            Tuning ECU/TCU pentru performanță/eficiență: timpi injecție, presiune turbo, turații, răspuns accelerație. Etape: (1) citire soft OBD/BDM/Bench/Bootmode; (2) optimizare mape (injecție, avans, limitatori); (3) scriere + test; (4) verificare siguranță/fiabilitate.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service4-content">
-                        <span class="text-xl font-semibold">✅ AdBlue • DPF • OPF • GPF • EGR</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service4-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            Dezactivare funcții de control/diagnoză pentru sisteme de emisii (AdBlue, DPF/GPF/OPF, EGR) pentru vehicule off-road/competiție. Avantaj: elimină erori/mode avarie cauzate de defecte la aceste sisteme.
-                        </p>
-                        <div class="mt-4 p-4 bg-gray-800 rounded-lg neumorphism-inset">
-                            <p class="text-red-400 font-medium">
-                                <strong>Disclaimer legal:</strong> Modificările pot fi neconforme pe drumuri publice; responsabilitatea aparține clientului. Servicii destinate exclusiv vehiculelor off-road/competiție.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Service 5 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service5-content">
-                        <span class="text-xl font-semibold">💻 Diagnoză O.E. • CP/SVM/DSS/SFD</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service5-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            ODIS/ISTA+/Xentry pentru codări, adaptări, update-uri. CP (VAG), SVM/DSS (calibrări VAG), SFD unlock (MQB Evo). Diagnosticare profundă cu echipamente originale pentru identificarea precisă a defecțiunilor.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Service 6 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service6-content">
-                        <span class="text-xl font-semibold">👨🏻‍💻 Full Coding • Funcții ascunse</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service6-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            Activări funcții comfort/infotainment/siguranță: Coming/Leaving Home, Needle Sweep, Adaptive Brake Lights, dezactivare Start/Stop, meniuri avansate (ex. AMG/Launch Control – dacă e suportat HW). Personalizări complete la cerere.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Service 7 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service7-content">
-                        <span class="text-xl font-semibold">🔐 Programare chei auto • Keyless</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service7-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            Chei noi/duplicate, codare telecomandă, sincronizare imobilizator (OBD/banc). PIN/CS ECU/BCM, soluții keyless GO/smart key. Recuperare chei pierdute, programare chei de rezervă, reparare telecomenzi defecte.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Service 8 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service8-content">
-                        <span class="text-xl font-semibold">📲 Apple CarPlay • Android Auto</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service8-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            Verificare compatibilitate HU (MIB/NTG/NBT etc.), activare prin codare/script/licență, testare USB/wireless. Integrare perfectă a smartphone-ului în sistemul multimedia al vehiculului.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Service 9 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service9-content">
-                        <span class="text-xl font-semibold">🆘 Airbag Crash RESET</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service9-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            Citire EEPROM/MCU (ex. 95160, SPC560), ștergere date crash, rescriere și test. Resetare module airbag după accident, reparare module defecte, înlocuire senzori.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Service 10 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service10-content">
-                        <span class="text-xl font-semibold">📟 FRM • CAS/ELV • IMMO OFF</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service10-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            Reparare și adaptare FRM3 (EEPROM corupt), CAS3/4 (chei, ISN, DME), ELV (reparație/înlocuire), IMMO OFF pentru adaptări tehnice. Soluții pentru probleme de imobilizator, blocări volan, defecte module de comandă.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Service 11 -->
-                <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-                    <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service11-content">
-                        <span class="text-xl font-semibold">🌍 UPDATE MAPS VAG • BMW</span>
-                        <svg class="accordion-icon w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="service11-content" class="accordion-content mt-4">
-                        <p class="text-gray-300">
-                            VAG (MIB/MIB2) prin SD sau activări; BMW (NBT/NBT EVO) cu FSC/USB. Pași: VIN + versiune, cod FSC/fișiere, instalare USB/SD. Actualizări hărți navigație pentru toate regiunile, activări permanente.
-                        </p>
-                    </div>
-                </div>
+          <div class="max-w-4xl mx-auto space-y-6"> <!-- TOATE serviciile sunt în interior -->
+    <!-- Service 1 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service1-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-car text-red-500 text-2xl"></i>
+                CAR – TRUCK – HEAVY DUTY
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service1-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                Servicii complete pentru toate tipurile de vehicule, de la mașini de pasageri la camioane și echipamente grele. Specializări pentru fiecare categorie, inclusiv optimizări specifice pentru vehiculele comerciale.
+            </p>
+        </div>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service2-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-bolt text-red-500 text-2xl"></i>
+                Software – Electronică – Electrică
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service2-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                Diagnosticare și reparare sisteme electronice auto: borduri, calculatoare, module de comandă. Soluții pentru probleme electrice: scurtcircuite, întreruperi, relee defecte. Programare și adaptare module noi.
+            </p>
+        </div>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service3-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-microchip text-red-500 text-2xl"></i>
+                ECU/TCU Tuning – Stage 1/2/3
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service3-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                Tuning ECU/TCU pentru performanță/eficiență: timpi injecție, presiune turbo, turații, răspuns accelerație. Etape: (1) citire soft OBD/BDM/Bench/Bootmode; (2) optimizare mape (injecție, avans, limitatori); (3) scriere + test; (4) verificare siguranță/fiabilitate.
+            </p>
+        </div>
+    </div>
+
+    <!-- Service 4 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service4-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-ban text-red-500 text-2xl"></i>
+                AdBlue • DPF • OPF • GPF • EGR
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service4-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                Dezactivare funcții de control/diagnoză pentru sisteme de emisii (AdBlue, DPF/GPF/OPF, EGR) pentru vehicule off-road/competiție. Avantaj: elimină erori/mode avarie cauzate de defecte la aceste sisteme.
+            </p>
+            <div class="mt-4 p-4 bg-gray-800 rounded-lg neumorphism-inset">
+                <p class="text-red-400 font-medium">
+                    <strong>Disclaimer legal:</strong> Modificările pot fi neconforme pe drumuri publice; responsabilitatea aparține clientului. Servicii destinate exclusiv vehiculelor off-road/competiție.
+                </p>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Service 5 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service5-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-laptop-code text-red-500 text-2xl"></i>
+                Diagnoză O.E. • CP/SVM/DSS/SFD
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service5-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                ODIS/ISTA+/Xentry pentru codări, adaptări, update-uri. CP (VAG), SVM/DSS (calibrări VAG), SFD unlock (MQB Evo). Diagnosticare profundă cu echipamente originale pentru identificarea precisă a defecțiunilor.
+            </p>
+        </div>
+    </div>
+
+    <!-- Service 6 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service6-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-code text-red-500 text-2xl"></i>
+                Full Coding • Funcții ascunse
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service6-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                Activări funcții comfort/infotainment/siguranță: Coming/Leaving Home, Needle Sweep, Adaptive Brake Lights, dezactivare Start/Stop, meniuri avansate (ex. AMG/Launch Control – dacă e suportat HW). Personalizări complete la cerere.
+            </p>
+        </div>
+    </div>
+
+    <!-- Service 7 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service7-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-key text-red-500 text-2xl"></i>
+                Programare chei auto • Keyless
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service7-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                Chei noi/duplicate, codare telecomandă, sincronizare imobilizator (OBD/banc). PIN/CS ECU/BCM, soluții keyless GO/smart key. Recuperare chei pierdute, programare chei de rezervă, reparare telecomenzi defecte.
+            </p>
+        </div>
+    </div>
+
+    <!-- Service 8 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service8-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-mobile-alt text-red-500 text-2xl"></i>
+                Apple CarPlay • Android Auto
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service8-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                Verificare compatibilitate HU (MIB/NTG/NBT etc.), activare prin codare/script/licență, testare USB/wireless. Integrare perfectă a smartphone-ului în sistemul multimedia al vehiculului.
+            </p>
+        </div>
+    </div>
+
+    <!-- Service 9 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service9-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-first-aid text-red-500 text-2xl"></i>
+                Airbag Crash RESET
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service9-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                Citire EEPROM/MCU (ex. 95160, SPC560), ștergere date crash, rescriere și test. Resetare module airbag după accident, reparare module defecte, înlocuire senzori.
+            </p>
+        </div>
+    </div>
+
+    <!-- Service 10 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service10-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-cogs text-red-500 text-2xl"></i>
+                FRM • CAS/ELV • IMMO OFF
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service10-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                Reparare și adaptare FRM3 (EEPROM corupt), CAS3/4 (chei, ISN, DME), ELV (reparație/înlocuire), IMMO OFF pentru adaptări tehnice. Soluții pentru probleme de imobilizator, blocări volan, defecte module de comandă.
+            </p>
+        </div>
+    </div>
+
+    <!-- Service 11 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service11-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-map-marked-alt text-red-500 text-2xl"></i>
+                UPDATE MAPS VAG • BMW
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-300"></i>
+        </button>
+        <div id="service11-content" class="max-h-0 overflow-hidden transition-all duration-300 mt-2">
+            <p class="text-gray-300">
+                VAG (MIB/MIB2) prin SD sau activări; BMW (NBT/NBT EVO) cu FSC/USB. Pași: VIN + versiune, cod FSC/fișiere, instalare USB/SD. Actualizări hărți navigație pentru toate regiunile, activări permanente.
+            </p>
+        </div>
+    </div>
+</div> <!-- AICI se închide containerul principal -->
+
     
     <!-- Price Calculator Section -->
-    <section id="calculator" class="py-20 bg-gray-900">
+    <section id="calculator" class="py-20 bg-black-900 mt-12" >
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Calculator de preț</h2>
@@ -928,9 +950,50 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                                 </svg>
-                            </a>
-                            <a href="https://wa.me/40752099005" aria-label="WhatsApp" class="bg-gray-800 hover:bg-green-600 text-light p-3 rounded-full transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.479 5.093 1.479 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194
+                          <a href="https://wa.me/40752099005" aria-label="WhatsApp" class="bg-gray-800 hover:bg-green-600 text-light p-3 rounded-full transition">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.479 5.093 1.479 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194"/>
+    </svg>
+</a>
+
+<script>
+// Obținem toate butoanele și le procesăm
+document.querySelectorAll(".accordion-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector(".accordion-icon");
+        const isExpanded = btn.getAttribute("aria-expanded") === "true";
+
+        // === PAS 1: Închide TOATE accordeoanele, în afară de acesta ===
+        document.querySelectorAll(".accordion-btn").forEach(otherBtn => {
+            if (otherBtn !== btn) {
+                const otherContent = otherBtn.nextElementSibling;
+                const otherIcon = otherBtn.querySelector(".accordion-icon");
+                otherBtn.setAttribute("aria-expanded", "false");
+                otherContent.style.maxHeight = "0px";
+                otherIcon.classList.remove("rotate-180");
+            }
+        });
+
+        // === PAS 2: Acum deschide sau închide CURENTUL ===
+        if (isExpanded) {
+            // Dacă e deja deschis → închide-l
+            content.style.maxHeight = "0px";
+            btn.setAttribute("aria-expanded", "false");
+            icon.classList.remove("rotate-180");
+        } else {
+            // Dacă e închis → deschide-l
+            content.style.maxHeight = "0px"; // reset
+            content.offsetHeight; // forțează reflow
+            content.style.maxHeight = content.scrollHeight + "px";
+            btn.setAttribute("aria-expanded", "true");
+            icon.classList.add("rotate-180");
+        }
+    });
+});
+</script>
+
+
+
 </body>
 </html>
