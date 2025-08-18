@@ -314,6 +314,23 @@
         </div>
     </div>
 
+     <!-- Service 2 -->
+    <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
+        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service2-content">
+            <span class="text-xl font-semibold flex items-center gap-2">
+                <i class="fas fa-bolt text-red-500 text-2xl"></i>
+                Parametrizare • Reflash MCU • Adaptări avansate
+
+            </span>
+            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
+        </button>
+        <div id="service2-content" class="accordion-content mt-2">
+            <p class="text-gray-300">
+                Reprogramăm și parametrizăm module electronice prin reflash MCU, corectând erori software și activând funcții avansate, pentru o funcționare optimă a sistemelor auto.
+            </p>
+        </div>
+    </div>
+
     <!-- Service 4 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
         <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service4-content">
@@ -841,82 +858,91 @@
             
             <div class="max-w-4xl mx-auto">
                 <div class="relative">
-                    <!-- Progress line -->
-                    <div class="hidden md:block absolute left-8 top-0 bottom-0 w-1 bg-gray-700 transform -translate-x-1/2"></div>
-                    
-                    <!-- Step 1 -->
-                    <div class="relative flex flex-col md:flex-row items-center mb-12">
-                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
-                            1
-                        </div>
-                        <div class="md:ml-8 flex-1">
-                            <h3 class="text-xl font-bold mb-2">Verificări inițiale și diagnoză</h3>
-                            <p class="text-gray-400">
-                                Analizăm starea curentă a vehiculului, verificăm erorile existente și stabilim parametrii de bază.
-                                Identificăm tipul de ECU și compatibilitatea cu serviciile solicitate.
-                            </p>
-                        </div>
+                   <section id="proces" class="py-20 bg-gray-900">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Procesul nostru de lucru</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">Metodologii clare și verificări multiple pentru rezultate optime</p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+            <div class="relative">
+                <!-- Linia de progres (doar pe desktop) -->
+                <div class="hidden md:block absolute left-8 top-0 bottom-0 w-1 bg-gray-700 transform -translate-x-1/2"></div>
+                
+                <!-- Pasul 1 -->
+                <div class="relative flex flex-col md:flex-row items-center mb-12">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-600 text-white font-bold text-xl z-10 mb-4 md:mb-0 shadow-lg">
+                        1
                     </div>
-                    
-                    <!-- Step 2 -->
-                    <div class="relative flex flex-col md:flex-row items-center mb-12">
-                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
-                            2
-                        </div>
-                        <div class="md:ml-8 flex-1">
-                            <h3 class="text-xl font-bold mb-2">Citire ECU - backup</h3>
-                            <p class="text-gray-400">
-                                Citim și salvăm configurația originală a ECU-ului într-un fișier sigur.
-                                Acest backup este esențial pentru orice eventualitate și este păstrat pentru client.
-                            </p>
-                        </div>
+                    <div class="md:ml-8 flex-1">
+                        <h3 class="text-xl font-bold mb-2">Verificări inițiale și diagnoză</h3>
+                        <p class="text-gray-400">
+                            Analizăm starea curentă a vehiculului, verificăm erorile existente și stabilim parametrii de bază.
+                            Identificăm tipul de ECU și compatibilitatea cu serviciile solicitate.
+                        </p>
                     </div>
-                    
-                    <!-- Step 3 -->
-                    <div class="relative flex flex-col md:flex-row items-center mb-12">
-                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
-                            3
-                        </div>
-                        <div class="md:ml-8 flex-1">
-                            <h3 class="text-xl font-bold mb-2">Calibrare și scriere</h3>
-                            <p class="text-gray-400">
-                                Aplicăm modificările solicitate prin OBD sau Bench, în funcție de tipul de ECU.
-                                Folosim instrumente profesionale și software specializat pentru rezultate precise.
-                            </p>
-                        </div>
+                </div>
+                
+                <!-- Pasul 2 -->
+                <div class="relative flex flex-col md:flex-row items-center mb-12">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-600 text-white font-bold text-xl z-10 mb-4 md:mb-0 shadow-lg">
+                        2
                     </div>
-                    
-                    <!-- Step 4 -->
-                    <div class="relative flex flex-col md:flex-row items-center mb-12">
-                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
-                            4
-                        </div>
-                        <div class="md:ml-8 flex-1">
-                            <h3 class="text-xl font-bold mb-2">Test drive și loguri</h3>
-                            <p class="text-gray-400">
-                                Verificăm funcționalitatea în condiții reale de utilizare.
-                                Analizăm parametrii în timp real și ajustăm dacă este necesar.
-                            </p>
-                        </div>
+                    <div class="md:ml-8 flex-1">
+                        <h3 class="text-xl font-bold mb-2">Citire ECU - backup</h3>
+                        <p class="text-gray-400">
+                            Citim și salvăm configurația originală a ECU-ului într-un fișier sigur.
+                            Acest backup este esențial pentru orice eventualitate și este păstrat pentru client.
+                        </p>
                     </div>
-                    
-                    <!-- Step 5 -->
-                    <div class="relative flex flex-col md:flex-row items-center">
-                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-accent text-white font-bold text-xl z-10 mb-4 md:mb-0">
-                            5
-                        </div>
-                        <div class="md:ml-8 flex-1">
-                            <h3 class="text-xl font-bold mb-2">Suport post-lucrare</h3>
-                            <p class="text-gray-400">
-                                Oferim suport tehnic pentru eventuale ajustări rezonabile.
-                                Păstrăm backup-ul original pentru orice necesitate de rollback.
-                            </p>
-                        </div>
+                </div>
+                
+                <!-- Pasul 3 -->
+                <div class="relative flex flex-col md:flex-row items-center mb-12">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-600 text-white font-bold text-xl z-10 mb-4 md:mb-0 shadow-lg">
+                        3
+                    </div>
+                    <div class="md:ml-8 flex-1">
+                        <h3 class="text-xl font-bold mb-2">Calibrare și scriere</h3>
+                        <p class="text-gray-400">
+                            Aplicăm modificările solicitate prin OBD sau Bench, în funcție de tipul de ECU.
+                            Folosim instrumente profesionale și software specializat pentru rezultate precise.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Pasul 4 -->
+                <div class="relative flex flex-col md:flex-row items-center mb-12">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-600 text-white font-bold text-xl z-10 mb-4 md:mb-0 shadow-lg">
+                        4
+                    </div>
+                    <div class="md:ml-8 flex-1">
+                        <h3 class="text-xl font-bold mb-2">Test drive și loguri</h3>
+                        <p class="text-gray-400">
+                            Verificăm funcționalitatea în condiții reale de utilizare.
+                            Analizăm parametrii în timp real și ajustăm dacă este necesar.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Pasul 5 -->
+                <div class="relative flex flex-col md:flex-row items-center">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-600 text-white font-bold text-xl z-10 mb-4 md:mb-0 shadow-lg">
+                        5
+                    </div>
+                    <div class="md:ml-8 flex-1">
+                        <h3 class="text-xl font-bold mb-2">Suport post-lucrare</h3>
+                        <p class="text-gray-400">
+                            Oferim suport tehnic pentru eventuale ajustări rezonabile.
+                            Păstrăm backup-ul original pentru orice necesitate de rollback.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     
     <!-- FAQ Section -->
