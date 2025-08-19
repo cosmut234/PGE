@@ -751,12 +751,7 @@
                                     </svg>
                                     WhatsApp
                                 </button>
-                                <button type="button" id="callBtn" class="wow-button bg-primary text-white font-bold py-3 px-6 rounded-lg flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M20 22.621l-3.521-3.52a1.5 1.5 0 0 0-1.061-.439h-1.916a11.042 11.042 0 1 1-4.783-10.224 1.5 1.5 0 0 0 1.391.911h2.049a1.5 1.5 0 0 0 1.061-.439l1.476-1.475a1.5 1.5 0 0 0-.439-2.45 12.569 12.569 0 0 0-5.846-1.412 12.6 12.6 0 0 0-8.996 3.723 12.6 12.6 0 0 0-3.726 8.996 12.6 12.6 0 0 0 3.723 8.996 12.6 12.6 0 0 0 8.996 3.726c4.486 0 8.612-2.562 10.621-6.6l-3.528-3.527z"/>
-                                    </svg>
-                                    Sună acum
-                                </button>
+                               
                             </div>
                         </div>
                     </div>
@@ -770,6 +765,90 @@
             </div>
         </div>
     </section>
+
+    <script>
+document.getElementById('priceCalculator').addEventListener('submit', function(e) {
+    e.preventDefault(); // nu vrem refresh-ul paginii
+
+    // Colectăm valorile
+    const brand = document.getElementById('brand').value;
+    const model = document.getElementById('model').value;
+    const engine = document.getElementById('engine').value;
+    const year = document.getElementById('year').value;
+    const serviceType = document.getElementById('serviceType').value;
+
+    // Setăm prețuri simple pentru exemplu
+    let price = 0;
+    let description = '';
+
+    switch(serviceType) {
+        case 'stage1':
+            price = 1000;
+            description = 'Stage 1 Tuning';
+            break;
+        case 'stage2':
+            price = 1500;
+            description = 'Stage 2 Tuning';
+            break;
+        case 'stage3':
+            price = 2000;
+            description = 'Stage 3 Tuning';
+            break;
+        case 'eco':
+            price = 800;
+            description = 'Tuning ECO';
+            break;
+        case 'dpf':
+            price = 600;
+            description = 'DPF/AdBlue/EGR OFF';
+            break;
+        case 'coding':
+            price = 400;
+            description = 'Codări/Adaptări';
+            break;
+        case 'carplay':
+            price = 300;
+            description = 'Activare CarPlay/Android Auto';
+            break;
+        case 'key':
+            price = 250;
+            description = 'Programare chei';
+            break;
+        case 'diagnostic':
+            price = 200;
+            description = 'Diagnostic complet';
+            break;
+        case 'crash':
+            price = 350;
+            description = 'Airbag Crash Reset';
+            break;
+        case 'immo':
+            price = 500;
+            description = 'IMMO OFF/Reparare';
+            break;
+        case 'maps':
+            price = 150;
+            description = 'Update hărți navigație';
+            break;
+        default:
+            price = 0;
+            description = '';
+    }
+
+    // Afișăm rezultatul
+    const priceDiv = document.getElementById('priceResult');
+    document.getElementById('estimatedPrice').innerText = price + ' RON';
+    document.getElementById('serviceDescription').innerText = description;
+    priceDiv.classList.remove('hidden');
+
+    // Opțional: legăm butonul WhatsApp să trimită mesaj cu estimarea
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const phone = '40752099005';
+    const text = encodeURIComponent(`Salut! Am estimat serviciul ${description} pentru ${brand} ${model} (${engine}, ${year}). Preț: ${price} RON.`);
+    whatsappBtn.setAttribute('onclick', `window.open('https://wa.me/${phone}?text=${text}', '_blank')`);
+});
+</script>
+
     
     <!-- Portfolio Section -->
     <section id="portfolio" class="py-20 bg-dark">
