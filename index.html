@@ -663,192 +663,289 @@
 </div>
 
     
-    <!-- Price Calculator Section -->
-    <section id="calculator" class="py-20 bg-black-900 mt-12" >
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Calculator de preț</h2>
-                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
-                <p class="text-gray-300 max-w-2xl mx-auto">
-                    Estimează rapid costul serviciilor noastre. Completează detaliile mai jos și vei primi o estimare pe loc.
-                </p>
-            </div>
-            
-            <div class="max-w-3xl mx-auto bg-gray-800 rounded-xl p-8 neumorphism">
-                <form id="priceCalculator" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="brand" class="block text-gray-300 mb-2">Marca vehiculului</label>
-                            <select id="brand" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary">
-                                <option value="">Selectează marca</option>
-                                <option value="audi">Audi</option>
-                                <option value="bmw">BMW</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="volkswagen">Volkswagen</option>
-                                <option value="skoda">Skoda</option>
-                                <option value="seat">SEAT</option>
-                                <option value="opel">Opel</option>
-                                <option value="ford">Ford</option>
-                                <option value="renault">Renault</option>
-                                <option value="dacia">Dacia</option>
-                                <option value="other">Altă marcă</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="model" class="block text-gray-300 mb-2">Model</label>
-                            <input type="text" id="model" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Introdu modelul">
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <label for="engine" class="block text-gray-300 mb-2">Motorizare</label>
-                            <input type="text" id="engine" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Ex: 2.0 TDI">
-                        </div>
-                        
-                        <div>
-                            <label for="year" class="block text-gray-300 mb-2">An fabricație</label>
-                            <input type="number" id="year" min="1990" max="2023" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Ex: 2018">
-                        </div>
-                        
-                        <div>
-                            <label for="vin" class="block text-gray-300 mb-2">VIN (opțional)</label>
-                            <input type="text" id="vin" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Număr de șasiu">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="serviceType" class="block text-gray-300 mb-2">Tip serviciu</label>
-                        <select id="serviceType" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-light focus:outline-none focus:ring-2 focus:ring-primary">
-                            <option value="">Selectează serviciul</option>
-                            <option value="stage1">Stage 1 Tuning</option>
-                            <option value="stage2">Stage 2 Tuning</option>
-                            <option value="stage3">Stage 3 Tuning</option>
-                            <option value="eco">Tuning ECO (consum redus)</option>
-                            <option value="dpf">DPF/AdBlue/EGR OFF</option>
-                            <option value="coding">Codări/Adaptări</option>
-                            <option value="carplay">Activare CarPlay/Android Auto</option>
-                            <option value="key">Programare chei</option>
-                            <option value="diagnostic">Diagnostic complet</option>
-                            <option value="crash">Airbag Crash Reset</option>
-                            <option value="immo">IMMO OFF/Reparare</option>
-                            <option value="maps">Update hărți navigație</option>
-                        </select>
-                    </div>
-                    
-                    <div id="priceResult" class="hidden bg-gray-900 rounded-lg p-6 neumorphism-inset">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="text-xl font-bold text-primary">Estimare preț</h3>
-                                <p id="estimatedPrice" class="text-3xl font-bold mt-2">0 RON</p>
-                                <p id="serviceDescription" class="text-gray-300 mt-1"></p>
-                            </div>
-                            <div class="flex space-x-4">
-                                <button type="button" id="whatsappBtn" class="wow-button bg-green-600 text-white font-bold py-3 px-6 rounded-lg flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.479 5.093 1.479 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                                    </svg>
-                                    WhatsApp
-                                </button>
-                               
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="pt-4">
-                        <button type="submit" class="wow-button w-full bg-primary text-white font-bold py-4 px-6 rounded-lg">
-                            Calculează preț
-                        </button>
-                    </div>
-                </form>
-            </div>
+   <!-- Tuning Calculator Section -->
+<section id="tuning-calculator" class="py-20 bg-dark relative">
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-light">Calculator Tuning Personalizat</h2>
+    <p class="text-gray-light mb-12 max-w-2xl mx-auto">
+      Introduceți parametrii mașinii dvs. și vedem ce poate face un tuning Stage 1.
+    </p>
+
+    <!-- Input Form -->
+    <div class="bg-gray-light bg-opacity-10 p-8 rounded-xl mb-12 max-w-2xl mx-auto neumorphism-inset">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-left text-gray mb-2">Putere originală (CP)</label>
+          <input type="number" id="originalPower" class="w-full p-3 rounded bg-dark text-light border border-gray" value="150">
         </div>
-    </section>
+        <div>
+          <label class="block text-left text-gray mb-2">Cuplu original (Nm)</label>
+          <input type="number" id="originalTorque" class="w-full p-3 rounded bg-dark text-light border border-gray" value="305">
+        </div>
+      </div>
+      <div class="mt-6">
+        <label class="block text-left text-gray mb-2">Tip tuning</label>
+        <select id="tuningLevel" class="w-full p-3 rounded bg-dark text-light border border-gray">
+          <option value="1.23">Stage 1 (+23%)</option>
+          <option value="1.35">Stage 1+ (+35%)</option>
+          <option value="1.50">Stage 2 (+50%)</option>
+          <option value="custom">Personalizat (%)</option>
+        </select>
+      </div>
+      <div id="customFactorGroup" class="mt-4 hidden">
+        <label class="block text-left text-gray mb-2">Creștere personalizată (%)</label>
+        <input type="number" id="customFactor" class="w-full p-3 rounded bg-dark text-light border border-gray" placeholder="Ex: 25" value="23">
+      </div>
+      <button onclick="updateGraph()" class="mt-6 wow-button bg-primary text-dark px-8 py-3 rounded-lg font-bold hover:bg-opacity-90 transition">
+        Generează Grafic
+      </button>
+    </div>
 
-    <script>
-document.getElementById('priceCalculator').addEventListener('submit', function(e) {
-    e.preventDefault(); // nu vrem refresh-ul paginii
+    <!-- Stats Boxes -->
+    <div class="flex flex-wrap justify-center gap-8 mb-16">
+      <!-- Putere -->
+      <div class="bg-gray-light bg-opacity-10 p-8 rounded-xl w-full sm:w-64 neumorphism-inset">
+        <h3 class="text-xl text-gray">Putere</h3>
+        <div id="powerResult" class="text-3xl font-bold mt-2">150 → <span class="text-primary">185 CP</span></div>
+        <div id="powerGain" class="text-primary font-semibold mt-1">+35 CP</div>
+      </div>
 
-    // Colectăm valorile
-    const brand = document.getElementById('brand').value;
-    const model = document.getElementById('model').value;
-    const engine = document.getElementById('engine').value;
-    const year = document.getElementById('year').value;
-    const serviceType = document.getElementById('serviceType').value;
+      <!-- Cuplu -->
+      <div class="bg-gray-light bg-opacity-10 p-8 rounded-xl w-full sm:w-64 neumorphism-inset">
+        <h3 class="text-xl text-gray">Cuplu</h3>
+        <div id="torqueResult" class="text-3xl font-bold mt-2">305 → <span class="text-primary">380 Nm</span></div>
+        <div id="torqueGain" class="text-primary font-semibold mt-1">+75 Nm</div>
+      </div>
+    </div>
 
-    // Setăm prețuri simple pentru exemplu
-    let price = 0;
-    let description = '';
+    <!-- Power Graph -->
+    <div class="max-w-4xl mx-auto mb-12">
+      <h3 class="text-2xl font-semibold mb-6 text-light">Curba de putere și cuplu</h3>
+      <canvas id="tuningGraph" class="w-full h-auto rounded-lg neumorphism-inset"></canvas>
+    </div>
 
-    switch(serviceType) {
-        case 'stage1':
-            price = 1000;
-            description = 'Stage 1 Tuning';
-            break;
-        case 'stage2':
-            price = 1500;
-            description = 'Stage 2 Tuning';
-            break;
-        case 'stage3':
-            price = 2000;
-            description = 'Stage 3 Tuning';
-            break;
-        case 'eco':
-            price = 800;
-            description = 'Tuning ECO';
-            break;
-        case 'dpf':
-            price = 600;
-            description = 'DPF/AdBlue/EGR OFF';
-            break;
-        case 'coding':
-            price = 400;
-            description = 'Codări/Adaptări';
-            break;
-        case 'carplay':
-            price = 300;
-            description = 'Activare CarPlay/Android Auto';
-            break;
-        case 'key':
-            price = 250;
-            description = 'Programare chei';
-            break;
-        case 'diagnostic':
-            price = 200;
-            description = 'Diagnostic complet';
-            break;
-        case 'crash':
-            price = 350;
-            description = 'Airbag Crash Reset';
-            break;
-        case 'immo':
-            price = 500;
-            description = 'IMMO OFF/Reparare';
-            break;
-        case 'maps':
-            price = 150;
-            description = 'Update hărți navigație';
-            break;
-        default:
-            price = 0;
-            description = '';
+    <!-- Price & CTA -->
+    <div>
+      <div class="text-3xl font-bold mb-6">
+        Preț estimat: <span id="price" class="text-primary">490 €</span>
+      </div>
+      <a href="https://wa.me/40752099005" target="_blank" class="wow-button inline-block px-10 py-4 bg-primary text-dark font-bold rounded-lg shadow-lg hover:bg-opacity-90 transition-all transform hover:scale-105">
+        Comandă acum
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Grafic JS Interactiv -->
+<script>
+  // Grafic variabile globale
+  let chartCtx, chartCanvas;
+
+  // Inițializare grafic
+  function initGraph() {
+    chartCanvas = document.getElementById("tuningGraph");
+    chartCtx = chartCanvas.getContext("2d");
+
+    // Setare dimensiune responsivă
+    const resizeCanvas = () => {
+      const container = chartCanvas.parentElement;
+      chartCanvas.width = container.clientWidth;
+      chartCanvas.height = 400;
+      updateGraph(); // redesenează la redimensionare
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+  }
+
+  // Actualizează graficul și valorile
+  function updateGraph() {
+    const originalPower = parseFloat(document.getElementById("originalPower").value) || 0;
+    const originalTorque = parseFloat(document.getElementById("originalTorque").value) || 0;
+    let factor;
+
+    const tuningLevel = document.getElementById("tuningLevel").value;
+    if (tuningLevel === "custom") {
+      const customPercent = parseFloat(document.getElementById("customFactor").value) || 23;
+      factor = 1 + (customPercent / 100);
+    } else {
+      factor = parseFloat(tuningLevel);
     }
 
-    // Afișăm rezultatul
-    const priceDiv = document.getElementById('priceResult');
-    document.getElementById('estimatedPrice').innerText = price + ' RON';
-    document.getElementById('serviceDescription').innerText = description;
-    priceDiv.classList.remove('hidden');
+    const tunedPower = Math.round(originalPower * factor);
+    const tunedTorque = Math.round(originalTorque * factor);
 
-    // Opțional: legăm butonul WhatsApp să trimită mesaj cu estimarea
-    const whatsappBtn = document.getElementById('whatsappBtn');
-    const phone = '40752099005';
-    const text = encodeURIComponent(`Salut! Am estimat serviciul ${description} pentru ${brand} ${model} (${engine}, ${year}). Preț: ${price} RON.`);
-    whatsappBtn.setAttribute('onclick', `window.open('https://wa.me/${phone}?text=${text}', '_blank')`);
-});
+    const powerGain = tunedPower - originalPower;
+    const torqueGain = tunedTorque - originalTorque;
+
+    // Actualizare afișaj
+    document.getElementById("powerResult").innerHTML = `${originalPower} → <span class="text-primary">${tunedPower} CP</span>`;
+    document.getElementById("powerGain").textContent = `+${powerGain} CP`;
+    document.getElementById("torqueResult").innerHTML = `${originalTorque} → <span class="text-primary">${tunedTorque} Nm</span>`;
+    document.getElementById("torqueGain").textContent = `+${torqueGain} Nm`;
+
+    // Estimare preț (ex: bazat pe nivel tuning)
+    let price = 490;
+    if (factor > 1.5) price = 750;
+    else if (factor > 1.35) price = 650;
+    else if (factor > 1.23) price = 550;
+    document.getElementById("price").textContent = price + " €";
+
+    // Desenează graficul
+    drawGraph(originalPower, originalTorque, tunedPower, tunedTorque);
+  }
+
+  // Afișare/Ascundere câmp personalizat
+  document.getElementById("tuningLevel").addEventListener("change", function () {
+    const customGroup = document.getElementById("customFactorGroup");
+    if (this.value === "custom") {
+      customGroup.classList.remove("hidden");
+    } else {
+      customGroup.classList.add("hidden");
+    }
+  });
+
+  // Desenează graficul
+  function drawGraph(origP, origT, tunedP, tunedT) {
+    const W = chartCanvas.width;
+    const H = chartCanvas.height;
+    const ctx = chartCtx;
+
+    // Șterge canvas
+    ctx.clearRect(0, 0, W, H);
+
+    // Fundal
+    ctx.fillStyle = "#111";
+    ctx.fillRect(0, 0, W, H);
+
+    // Axe
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(60, H - 60);
+    ctx.lineTo(60, 40);
+    ctx.lineTo(W - 40, 40);
+    ctx.stroke();
+
+    // Etichete RPM
+    const rpmLabels = ["1000", "2000", "3000", "4000", "5000", "6000"];
+    rpmLabels.forEach((label, i) => {
+      const x = 60 + (i * (W - 100)) / 5;
+      ctx.fillStyle = "#AAA";
+      ctx.font = "12px Poppins, sans-serif";
+      ctx.fillText(label, x - 10, H - 40);
+      ctx.beginPath();
+      ctx.moveTo(x, H - 60);
+      ctx.lineTo(x, 40);
+      ctx.strokeStyle = "#222";
+      ctx.stroke();
+    });
+
+    // Etichete Putere (PS)
+    const powerMax = Math.ceil(tunedP / 50) * 50;
+    const powerSteps = powerMax / 50;
+    for (let i = 0; i <= powerSteps; i++) {
+      const val = i * 50;
+      const y = H - 60 - map(val, 0, powerMax, 0, H - 120);
+      ctx.fillText(val + " PS", 20, y + 4);
+    }
+
+    // Etichete Cuplu (Nm)
+    const torqueMax = Math.ceil(tunedT / 100) * 100;
+    const torqueSteps = torqueMax / 100;
+    for (let i = 0; i <= torqueSteps; i++) {
+      const val = i * 100;
+      const y = H - 60 - map(val, 0, torqueMax, 0, H - 120);
+      ctx.fillText(val + " Nm", W - 60, y + 4);
+    }
+
+    // Funcție mapare valori
+    function map(val, inMin, inMax, outMin, outMax) {
+      return outMin + ((val - inMin) / (inMax - inMin)) * (outMax - outMin);
+    }
+
+    // Puncte RPM
+    const rpmPoints = [1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000];
+
+    // Generare curbe liniare (creștere proporțională)
+    const generateCurve = (base, target) => {
+      return rpmPoints.map((rpm, i) => {
+        let boostFactor;
+        if (rpm < 2000) boostFactor = 0.1 + (i / 10) * 0.4; // mai puțin boost la relanti
+        else if (rpm < 4000) boostFactor = 0.5 + (i / 10) * 0.3;
+        else boostFactor = 0.8 + (i / 10) * 0.2;
+        return base + (target - base) * boostFactor;
+      });
+    };
+
+    const originalPowerCurve = generateCurve(0, origP);
+    const tunedPowerCurve = generateCurve(0, tunedP);
+    const originalTorqueCurve = generateCurve(0, origT);
+    const tunedTorqueCurve = generateCurve(0, tunedT);
+
+    // Desenare curbă
+    const drawCurve = (data, color, width = 3) => {
+      ctx.beginPath();
+      data.forEach((val, i) => {
+        const x = 60 + (i * (W - 100)) / 10;
+        const y = H - 60 - map(val, 0, powerMax, 0, H - 120);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.stroke();
+    };
+
+    // Desenează curbele
+    drawCurve(originalPowerCurve, "#6B7280", 2);     // Putere originală
+    drawCurve(tunedPowerCurve, "#FF0000", 3);         // Putere tuning
+    drawCurve(originalTorqueCurve, "#4B5563", 2);     // Cuplu original
+    drawCurve(tunedTorqueCurve, "#00A2FF", 3);        // Cuplu tuning
+
+    // Legendă
+    const legendY = 50;
+    ctx.font = "14px Poppins, sans-serif";
+    ctx.fillStyle = "#DDD";
+
+    ctx.fillText("Putere originală", 100, legendY);
+    ctx.strokeStyle = "#6B7280";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(230, legendY - 8);
+    ctx.lineTo(260, legendY - 8);
+    ctx.stroke();
+
+    ctx.fillText("Putere tuning", 280, legendY);
+    ctx.strokeStyle = "#FF0000";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(380, legendY - 8);
+    ctx.lineTo(410, legendY - 8);
+    ctx.stroke();
+
+    ctx.fillText("Cuplu original", 100, legendY + 20);
+    ctx.strokeStyle = "#4B5563";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(230, legendY + 12);
+    ctx.lineTo(260, legendY + 12);
+    ctx.stroke();
+
+    ctx.fillText("Cuplu tuning", 280, legendY + 20);
+    ctx.strokeStyle = "#00A2FF";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(380, legendY + 12);
+    ctx.lineTo(410, legendY + 12);
+    ctx.stroke();
+  }
+
+  // Inițializează graficul la încărcare
+  document.addEventListener("DOMContentLoaded", () => {
+    initGraph();
+    updateGraph(); // afișează valori implicite la început
+  });
 </script>
-
     
     <!-- Portfolio Section -->
     <section id="portfolio" class="py-20 bg-dark">
