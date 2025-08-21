@@ -335,7 +335,7 @@
 
 <!-- Modal Echipamente -->
 <div id="equipmentModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
-  <div class="bg-gray-900 text-gray-200 p-6 rounded-xl max-w-xl w-full shadow-[0_0_30px_rgba(0,255,0,0.5)] border-2 border-green-500 relative animate-pulse-slow-green">
+  <div class="bg-gray-900 text-gray-200 p-4 rounded-xl max-w-xl w-full shadow-[0_0_30px_rgba(0,255,0,0.5)] border-2 border-green-500 relative animate-pulse-slow-green">
     <!-- Buton închidere -->
     <button onclick="toggleEquipmentModal(false)" class="absolute top-3 right-3 text-red-400 hover:text-red-200 text-3xl font-bold">&times;</button>
 
@@ -483,8 +483,8 @@
   }
 
   @keyframes pulse-slow-green {
-    0%, 100% { box-shadow: 0 0 20px rgba(128, 0, 0, 0.541), 0 0 40px rgba(128, 0, 0, 0.532); }
-    50% { box-shadow: 0 0 40px rgba(128, 0, 0, 0.525), 0 0 80px rgba(128, 0, 0, 0.603); }
+    0%, 100% { box-shadow: 0 0 20px rgb(207, 4, 4), 0 0 40px rgb(177, 2, 2); }
+    50% { box-shadow: 0 0 40px rgba(255, 3, 3, 0.525), 0 0 80px rgb(192, 1, 1); }
   }
   .animate-pulse-slow-green {
     animation: pulse-slow-green 3s infinite;
