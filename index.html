@@ -898,7 +898,7 @@
          
     </section>
 
-  <!-- Secțiune Recenzii Google - Premium Design -->
+   <!-- Secțiune Recenzii Google - Premium Design -->
 <section class="google-reviews-section-premium">
   <div class="reviews-content-premium">
     <!-- Icon Google -->
@@ -911,11 +911,13 @@
       </svg>
     </div>
 
-    <!-- Stele și număr recenzii -->
-    <div class="google-rating-premium">
-      <div class="stars-premium">⭐⭐⭐⭐⭐</div>
-      <span class="rating-count-premium">(100+)</span>
-    </div>
+   <!-- Stele și număr recenzii -->
+<div class="google-rating-premium-wrapper">
+  <div class="google-rating-premium">
+    <div class="stars-premium">⭐⭐⭐⭐⭐</div>
+    <span class="rating-count-premium">(100+)</span>
+  </div>
+</div>
 
     <!-- Titlu și text -->
     <h2 class="reviews-title-premium">Recenzii Google</h2>
@@ -1000,26 +1002,38 @@
   }
 
   /* Stele și număr recenzii */
-  .google-rating-premium {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 12px 0 10px;
-  }
+  /* Wrapper cu bordură albă rotunjită */
+.google-rating-premium-wrapper {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin: 12px 0 10px;
+  backdrop-filter: blur(4px);
+}
 
-  .stars-premium {
-    font-size: 22px;
-    letter-spacing: 2px;
-    color: #FFD700; /* Stele aurii */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  }
+/* Stele și număr recenzii */
+.google-rating-premium {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-  .rating-count-premium {
-    color: #bbbbbb;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: -0.3px;
-  }
+.stars-premium {
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: #FFD700; /* Aurii */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.rating-count-premium {
+  color: #bbbbbb;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
 
   /* Titlu premium */
   .reviews-title-premium {
@@ -1103,7 +1117,7 @@
   .whatsapp-btn-premium:hover svg {
     transform: scale(1.1);
   }
-</style> 
+</style>
 
 
 
