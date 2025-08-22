@@ -292,7 +292,7 @@
             </a>
         </div>
     </section>
-     <!-- Remote Section -->
+  <!-- Remote Section -->
 <section id="services" class="py-20 bg-dark">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
@@ -325,65 +325,19 @@
           </a>
         </div>
 
-        <!-- Link Echipamente -->
-        <p class="mt-12 text-gray-400 text-sm">
-          <button onclick="toggleEquipmentModal(true)" 
-            class="text-red-500 hover:text-red-400 transition-colors duration-300 font-medium border-b border-red-500 pb-0.5">
-            Nu Am Echipamentul Necesar
-          </button>
+        <!-- Disclaimer mic, discret -->
+        <p class="mt-12 text-gray-500 text-sm">
+          Nu ai echipamentul necesar? Te putem ajuta și cu asta! 
+          <a href="https://wa.me/40752099005?text=Salut,%20doresc%20informații%20despre%20echipamente%20de%20flashing%20și%20codări."
+             target="_blank"
+             class="text-red-500 hover:text-red-400 transition-colors duration-300 font-medium border-b border-red-500 border-dotted pb-0.5">
+             Lasă-ne un mesaj
+          </a>
         </p>
       </div>
     </div>
   </div>
 </section>
-
-<!-- Modal Echipamente -->
-<div id="equipmentModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50" role="dialog" aria-modal="true">
-  <div class="bg-gray-900 text-gray-200 p-4 rounded-xl max-w-xl w-full shadow-[0_0_30px_rgba(0,255,0,0.5)] border-2 border-green-500 relative animate-pulse-slow-green">
-    <!-- Buton închidere -->
-    <button onclick="toggleEquipmentModal(false)" aria-label="Închide"
-      class="absolute top-3 right-3 text-red-400 hover:text-red-200 text-3xl font-bold">&times;
-    </button>
-
-    <h3 class="text-xl md:text-3xl font-bold text-white mb-6 text-center">
-      Ai nevoie de echipament?
-    </h3>
-
-    <div class="space-y-4 text-base leading-relaxed max-h-[60vh] overflow-y-auto pr-2">
-      <p>
-        <strong>Nu-ți face griji!</strong> Oferim și <strong>vânzare de echipamente profesionale</strong> pentru codări ECU/TCU, flashing, programare chei și diagnoză avansată.
-      </p>
-      <p>
-        Livrăm în toată țara și te asistăm cu instalarea și configurarea corectă a tuturor dispozitivelor.
-      </p>
-
-      <div class="bg-gray-800 p-4 rounded-lg border border-green-500/50">
-        <h4 class="font-semibold text-white mb-2">Echipamente disponibile:</h4>
-        <ul class="list-disc list-inside space-y-1 text-gray-300">
-          <li>Cabluri de programare (OBD2, BDM, SPI, etc.)</li>
-          <li>Adaptoare pentru citire EEPROM/Flash</li>
-          
-          <li>Dispozitive de flashing (T3/PPG, KESS, K-TAG, CG-100, etc.)</li>
-          <li>Software-uri licențiate (cu suport tehnic)</li>
-        </ul>
-      </div>
-
-      <p class="font-medium text-green-400">
-        Poți cumpăra doar ce îți trebuie sau un pachet complet „All-in-One” pentru începerea activității.
-      </p>
-    </div>
-
-    <div class="mt-8 text-center">
-      <a href="https://wa.me/40752099005?text=Salut,%20doresc%20informații%20despre%20echipamente%20de%20flashing%20și%20codări."
-        target="_blank"
-        class="inline-block px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl border-2 border-red-500 
-               shadow-[0_0_15px_rgba(255,0,0,0.5)] hover:shadow-[0_0_30px_rgba(255,0,0,0.9)] 
-               transition-all duration-300 transform hover:scale-110 font-semibold text-lg tracking-wide">
-        Spune-mi de ce ai nevoie 🔧
-      </a>
-    </div>
-  </div>
-</div>
 
 <!-- Modal Disclaimer Parteneriat -->
 <div id="disclaimerModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50" role="dialog" aria-modal="true">
@@ -432,44 +386,16 @@
   </div>
 </div>
 
-<!-- Script pentru toggle -->
+<!-- Script pentru toggle (doar pentru disclaimerModal) -->
 <script>
   function toggleModal(show) {
     const modal = document.getElementById('disclaimerModal');
     modal.classList.toggle('hidden', !show);
     modal.classList.toggle('flex', show);
   }
-
-  function toggleEquipmentModal(show) {
-    const modal = document.getElementById('equipmentModal');
-    modal.classList.toggle('hidden', !show);
-    modal.classList.toggle('flex', show);
-  }
 </script>
 
-<!-- Stil pentru animații -->
-<style>
-  @keyframes pulse-slow {
-    0%, 100% { box-shadow: 0 0 20px red, 0 0 40px red; }
-    50% { box-shadow: 0 0 40px red, 0 0 80px red; }
-  }
-  .animate-pulse-slow {
-    animation: pulse-slow 3s infinite;
-  }
-
-  @keyframes pulse-slow-green {
-    0%, 100% { box-shadow: 0 0 20px rgb(255, 0, 0), 0 0 40px rgb(200, 0, 0); }
-    50% { box-shadow: 0 0 40px rgb(255, 0, 0), 0 0 80px rgb(200, 0, 0); }
-  }
-  .animate-pulse-slow-green {
-    animation: pulse-slow-green 3s infinite;
-  }
-</style>
-
-
-
-
-<!-- Stil extra pentru animația neon pulse -->
+<!-- Stil pentru animația neon pulse -->
 <style>
   @keyframes pulse-slow {
     0%, 100% { box-shadow: 0 0 20px red, 0 0 40px red; }
