@@ -128,6 +128,33 @@
             transform: scale(0.98);
         }
         
+        .accordion-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        
+        .accordion-btn:hover {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+            transform: translateX(4px);
+        }
+        
+        .accordion-btn:active {
+            transform: translateX(2px) scale(0.99);
+        }
+        
+        .accordion-btn .text-xs {
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .accordion-btn:hover .text-xs {
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+        }
+        
         .wow-button {
             transition: all 0.3s ease;
             box-shadow: 0 0 15px rgba(255, 0, 0, 0);
@@ -450,13 +477,13 @@
 
 <!-- Service 1 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service2-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-bolt text-red-500 text-2xl"></i>
-                Software – Electronică – Electrică
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service2-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-bolt text-red-500 text-2xl"></i>
+          Software – Electronică – Electrică
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service2-content" class="accordion-content mt-2">
             <p class="text-gray-300">
                 Diagnosticare și reparare sisteme electronice auto: borduri, calculatoare, module de comandă. Soluții pentru probleme electrice: scurtcircuite, întreruperi, relee defecte. Programare și adaptare module noi.
@@ -466,13 +493,13 @@
 
     <!-- Service 3 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service3-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-microchip text-red-500 text-2xl"></i>
-                ECU/TCU Tuning – Stage 1/2/3
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service3-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-microchip text-red-500 text-2xl"></i>
+          ECU/TCU Tuning – Stage 1/2/3
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service3-content" class="accordion-content mt-2">
             <p class="text-gray-300 font-medium">🔋 <strong>ECU/TCU Tuning – Stage 1/2/3</strong></p>
             <p class="text-gray-300 mt-2">
@@ -489,14 +516,13 @@
 
      <!-- Service 2 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service2-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-bolt text-red-500 text-2xl"></i>
-                Parametrizare • Reflash MCU • Adaptări avansate
-
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service2-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-bolt text-red-500 text-2xl"></i>
+          Parametrizare • Reflash MCU • Adaptări avansate
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service2-content" class="accordion-content mt-2">
             <p class="text-gray-300">
                 Reprogramăm și parametrizăm module electronice prin reflash MCU, corectând erori software și activând funcții avansate, pentru o funcționare optimă a sistemelor auto.
@@ -506,13 +532,13 @@
 
     <!-- Service 4 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service4-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-ban text-red-500 text-2xl"></i>
-                AdBlue • DPF • OPF • GPF • EGR
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service4-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-ban text-red-500 text-2xl"></i>
+          AdBlue • DPF • OPF • GPF • EGR
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service4-content" class="accordion-content mt-2">
             <p class="text-gray-300 font-medium">✅ <strong>AdBlue / DPF / OPF / GPF / EGR OFF</strong></p>
             <p class="text-gray-300 mt-2">
@@ -536,19 +562,18 @@
 
     <!-- Service 5 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service5-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-               <svg xmlns="http://www.w3.org/2000/svg" 
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service5-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+           <svg xmlns="http://www.w3.org/2000/svg" 
      viewBox="0 0 640 512" 
      class="w-6 h-6 text-red-500" 
      fill="currentColor">
-  <path d="M64 96c0-35.3 28.7-64 64-64l384 0c35.3 0 64 28.7 64 64l0 240-64 0 0-240-384 0 0 240-64 0 0-240zM0 403.2C0 392.6 8.6 384 19.2 384l601.6 0c10.6 0 19.2 8.6 19.2 19.2 0 42.4-34.4 76.8-76.8 76.8L76.8 480C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/>
-</svg>
-
-                Diagnoză O.E. • CP/SVM/DSS/SFD
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+    <path d="M64 96c0-35.3 28.7-64 64-64l384 0c35.3 0 64 28.7 64 64l0 240-64 0 0-240-384 0 0 240-64 0 0-240zM0 403.2C0 392.6 8.6 384 19.2 384l601.6 0c10.6 0 19.2 8.6 19.2 19.2 0 42.4-34.4 76.8-76.8 76.8L76.8 480C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/>
+  </svg>
+          Diagnoză O.E. • CP/SVM/DSS/SFD
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service5-content" class="accordion-content mt-2">
             <p class="text-gray-300 font-medium">💻 <strong>Diagnoză OEM – CP / SVM / DSS / SFD</strong></p>
             <p class="text-gray-300 mt-2">
@@ -564,13 +589,13 @@
 
     <!-- Service 6 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service6-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-code text-red-500 text-2xl"></i>
-                Full Coding • Funcții ascunse
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service6-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-code text-red-500 text-2xl"></i>
+          Full Coding • Funcții ascunse
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service6-content" class="accordion-content mt-2">
             <p class="text-gray-300 font-medium">👨🏻‍💻 <strong>Full Coding – Funcții Ascunse</strong></p>
             <p class="text-gray-300 mt-2">
@@ -589,13 +614,13 @@
 
     <!-- Service 7 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service7-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-key text-red-500 text-2xl"></i>
-                Programare chei auto • Keyless
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service7-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-key text-red-500 text-2xl"></i>
+          Programare chei auto • Keyless
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service7-content" class="accordion-content mt-2">
             <p class="text-gray-300 font-medium">🔐 <strong>Programare Chei Auto – Keyless</strong></p>
             <p class="text-gray-300 mt-2">
@@ -612,13 +637,13 @@
 
     <!-- Service 8 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service8-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-mobile-alt text-red-500 text-2xl"></i>
-                Apple CarPlay • Android Auto
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service8-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-mobile-alt text-red-500 text-2xl"></i>
+          Apple CarPlay • Android Auto
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service8-content" class="accordion-content mt-2">
             <p class="text-gray-300 font-medium">📲 <strong>Apple CarPlay / Android Auto – Activare</strong></p>
             <p class="text-gray-300 mt-2">
@@ -635,13 +660,13 @@
 
     <!-- Service 9 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service9-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-first-aid text-red-500 text-2xl"></i>
-                Airbag Crash RESET
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service9-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-first-aid text-red-500 text-2xl"></i>
+          Airbag Crash RESET
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service9-content" class="accordion-content mt-2">
             <p class="text-gray-300 font-medium">🆘 <strong>Airbag Crash Reset</strong></p>
             <p class="text-gray-300 mt-2">
@@ -660,13 +685,13 @@
 
     <!-- Service 10 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service10-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-cogs text-red-500 text-2xl"></i>
-                FRM • CAS/ELV • IMMO OFF
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service10-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-cogs text-red-500 text-2xl"></i>
+          FRM • CAS/ELV • IMMO OFF
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service10-content" class="accordion-content mt-2">
             <p class="text-gray-300 font-medium">📟 <strong>FRM / CAS / ELV / IMMO OFF – Reparare și Adaptare</strong></p>
             <p class="text-gray-300 mt-2">
@@ -685,13 +710,13 @@
 
     <!-- Service 12 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service12-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-map-marked-alt text-red-500 text-2xl"></i>
-                UPDATE MAPS VAG • BMW • VOLVO
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service12-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-map-marked-alt text-red-500 text-2xl"></i>
+          UPDATE MAPS VAG • BMW • VOLVO
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service12-content" class="accordion-content mt-2">
             <p class="text-gray-300 font-medium">🌍 <strong>UPDATE HĂRȚI – VAG / BMW / VOLVO</strong></p>
             <p class="text-gray-300 mt-2">
@@ -712,13 +737,13 @@
     </div>
 
      <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
-        <button class="accordion-btn w-full flex justify-between items-center focus:outline-none" aria-expanded="false" aria-controls="service1-content">
-            <span class="text-xl font-semibold flex items-center gap-2">
-                <i class="fas fa-car text-red-500 text-2xl"></i>
-                CAR TRUCK HEAVY DUTY
-            </span>
-            <i class="fas fa-chevron-down accordion-icon text-red-500 transition-transform duration-700 ease-in-out"></i>
-        </button>
+      <button class="accordion-btn w-full flex flex-col items-start focus:outline-none" aria-expanded="false" aria-controls="service1-content">
+        <span class="text-xl font-semibold flex items-center gap-2">
+          <i class="fas fa-car text-red-500 text-2xl"></i>
+          CAR TRUCK HEAVY DUTY
+        </span>
+        <span class="text-xs text-red-500 mt-1">Vezi Detalii</span>
+      </button>
         <div id="service1-content" class="accordion-content mt-2">
             <p class="text-gray-300">
                 Servicii complete pentru toate tipurile de vehicule, de la mașini de pasageri la camioane și echipamente grele. Specializări pentru fiecare categorie, inclusiv optimizări specifice pentru vehiculele comerciale.
@@ -1542,28 +1567,34 @@ document.querySelectorAll(".accordion-btn").forEach(btn => {
 
         // === PAS 1: Închide TOATE accordeoanele, în afară de acesta ===
         document.querySelectorAll(".accordion-btn").forEach(otherBtn => {
-            if (otherBtn !== btn) {
-                const otherContent = otherBtn.nextElementSibling;
-                const otherIcon = otherBtn.querySelector(".accordion-icon");
-                otherBtn.setAttribute("aria-expanded", "false");
-                otherContent.style.maxHeight = "0px";
-                otherIcon.classList.remove("rotate-180");
+          if (otherBtn !== btn) {
+            const otherContent = otherBtn.nextElementSibling;
+            const otherIcon = otherBtn.querySelector(".accordion-icon");
+            otherBtn.setAttribute("aria-expanded", "false");
+            otherContent.style.maxHeight = "0px";
+            if (otherIcon) {
+              otherIcon.classList.remove("rotate-180");
             }
+          }
         });
 
         // === PAS 2: Acum deschide sau închide CURENTUL ===
         if (isExpanded) {
-            // Dacă e deja deschis → închide-l
-            content.style.maxHeight = "0px";
-            btn.setAttribute("aria-expanded", "false");
+          // Dacă e deja deschis → închide-l
+          content.style.maxHeight = "0px";
+          btn.setAttribute("aria-expanded", "false");
+          if (icon) {
             icon.classList.remove("rotate-180");
+          }
         } else {
             // Dacă e închis → deschide-l
             content.style.maxHeight = "0px"; // reset
             content.offsetHeight; // forțează reflow
             content.style.maxHeight = content.scrollHeight + "px";
             btn.setAttribute("aria-expanded", "true");
+          if (icon) {
             icon.classList.add("rotate-180");
+          }
         }
     });
 });
