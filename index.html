@@ -170,6 +170,12 @@
           flex-shrink: 0;
         }
 
+        @media (min-width: 769px) {
+          .accordion-pill {
+            margin-left: 2rem;
+          }
+        }
+
         @media (max-width: 768px) {
           .accordion-pill {
             width: 100%;
@@ -506,14 +512,14 @@
 <!-- Service 1 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service1-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-bolt text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">Software – Electronică – Electrică</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -529,14 +535,14 @@
     <!-- Service 3 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service2-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-microchip text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">ECU/TCU Tuning – Stage 1/2/3</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -559,14 +565,14 @@
      <!-- Service 2 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service3-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-bolt text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">Parametrizare • Reflash MCU • Adaptări avansate</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -582,14 +588,14 @@
     <!-- Service 4 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service4-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-ban text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">AdBlue • DPF • OPF • GPF • EGR</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -619,8 +625,8 @@
     <!-- Service 5 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service5-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="w-6 h-6" fill="currentColor" aria-hidden="true">
                 <path d="M64 96c0-35.3 28.7-64 64-64l384 0c35.3 0 64 28.7 64 64l0 240-64 0 0-240-384 0 0 240-64 0 0-240zM0 403.2C0 392.6 8.6 384 19.2 384l601.6 0c10.6 0 19.2 8.6 19.2 19.2 0 42.4-34.4 76.8-76.8 76.8L76.8 480C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z" />
@@ -628,7 +634,7 @@
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">Diagnoză O.E. • CP/SVM/DSS/SFD</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -650,14 +656,14 @@
     <!-- Service 6 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service6-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-code text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">Full Coding • Funcții ascunse</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -682,14 +688,14 @@
     <!-- Service 7 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service7-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-key text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">Programare chei auto • Keyless</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -712,14 +718,14 @@
     <!-- Service 8 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service8-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-mobile-alt text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">Apple CarPlay • Android Auto</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -742,14 +748,14 @@
     <!-- Service 9 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service9-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-first-aid text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">Airbag Crash RESET</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -774,14 +780,14 @@
     <!-- Service 10 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service10-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-cogs text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">FRM • CAS/ELV • IMMO OFF</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -806,14 +812,14 @@
     <!-- Service 12 -->
     <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service11-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-map-marked-alt text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">UPDATE MAPS VAG • BMW • VOLVO</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
@@ -840,14 +846,14 @@
 
      <div class="service-card bg-gray-900 rounded-xl p-6 neumorphism">
       <button class="accordion-btn w-full text-left focus:outline-none" aria-expanded="false" aria-controls="service12-content">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <div class="flex items-center gap-4 flex-1">
             <div class="flex h-14 w-14 -ml-2 items-center justify-center rounded-full bg-red-500/10 text-red-500 flex-shrink-0">
               <i class="fas fa-car text-xl"></i>
             </div>
             <span class="text-lg sm:text-xl font-semibold text-gray-100">CAR TRUCK HEAVY DUTY</span>
           </div>
-          <div class="accordion-pill md:ml-auto">
+          <div class="accordion-pill">
             <span>Vezi detalii</span>
             <i class="fas fa-chevron-down text-xs accordion-icon transition-transform duration-300"></i>
           </div>
