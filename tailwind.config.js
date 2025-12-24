@@ -2,6 +2,8 @@
 module.exports = {
   content: [
      "./index.html",
+     "./catalog.html",
+     "./gdpr.html",
   "./src/**/*.{html,js}",
   ],
   theme: {
