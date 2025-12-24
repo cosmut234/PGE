@@ -386,7 +386,7 @@
                         Caută
                     </h3>
                     <div class="relative group">
-                        <input type="text" placeholder="Caută produs sau serviciu..." class="w-full bg-black/50 border border-gray-700/50 rounded-xl py-3 px-4 text-sm text-white focus:outline-none focus:border-primary transition-all placeholder-gray-500 input-glow">
+                        <input id="searchInput" type="text" placeholder="Caută produs sau serviciu..." class="w-full bg-black/50 border border-gray-700/50 rounded-xl py-3 px-4 text-sm text-white focus:outline-none focus:border-primary transition-all placeholder-gray-500 input-glow">
                         <button class="absolute right-3 top-3 text-gray-500 group-focus-within:text-primary transition">
                             <i class="fas fa-arrow-right text-sm"></i>
                         </button>
@@ -752,6 +752,28 @@
         
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll(); // Initial check
+
+        // Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const productCards = document.querySelectorAll('.product-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            productCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                const category = card.querySelector('.category-tag').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm) || category.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                    card.classList.add('flex'); // Ensure it's displayed as flex
+                } else {
+                    card.classList.add('hidden');
+                    card.classList.remove('flex');
+                }
+            });
+        });
     </script>
 
 </body>
